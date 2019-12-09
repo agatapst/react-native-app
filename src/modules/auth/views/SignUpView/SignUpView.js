@@ -19,7 +19,7 @@ const SignUpView = props => {
         <TextInput style={styles.input} placeholder="repeat password" />
         <Button title="SUBMIT" onPress={() => navigate("Main")} />
         <Text>I have an account: </Text>
-        <Button title="SIGN IN" onPress={() => navigate("SignIn")} />
+        <Button title="Sign in" onPress={() => navigate("SignIn")} />
       </View>
     </SafeAreaView>
   );

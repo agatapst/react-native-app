@@ -34,7 +34,7 @@ class SignInView extends PureComponent {
           <TextInput style={styles.input} placeholder="password" />
           <Button title="SIGN IN" onPress={() => navigate("Main")} />
           <Text>I don't have an account: </Text>
-          <Button title="SIGN UP" onPress={() => navigate("SignUp")} />
+          <Button title="Sign up" onPress={() => navigate("SignUp")} />
         </View>
       </SafeAreaView>
     );

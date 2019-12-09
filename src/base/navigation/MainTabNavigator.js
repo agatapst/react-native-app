@@ -1,37 +1,39 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import HomepageView from "../containers/Homepage";
+import HomeScreen from "../screens/HomeScreen";
+import LinksScreen from "../screens/LinksScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const MainTabNavigator = createMaterialBottomTabNavigator(
   {
-    Homepage: {
-      screen: HomepageView,
+    HomeScreen: {
+      screen: HomeScreen,
       navigationOptions: {
-        title: "Homepage 1",
-        tabBarLabel: "Homepage",
+        title: "Home",
+        tabBarLabel: "Home",
+        tabBarIcon: <Ionicons name="ios-home" size={24} color="white" />
+      }
+    },
+    LinksScreen: {
+      screen: LinksScreen,
+      navigationOptions: {
+        title: "Links",
+        tabBarLabel: "Links",
         tabBarIcon: <Ionicons name="ios-person-add" size={24} color="white" />
       }
     },
-    Homepage2: {
-      screen: HomepageView,
+    SettingsScreen: {
+      screen: SettingsScreen,
       navigationOptions: {
-        title: "Homepage 2",
-        tabBarLabel: "Homepage",
-        tabBarIcon: <Ionicons name="ios-person-add" size={24} color="white" />
-      }
-    },
-    Homepage3: {
-      screen: HomepageView,
-      navigationOptions: {
-        title: "Homepage 3",
-        tabBarLabel: "Homepage",
-        tabBarIcon: <Ionicons name="ios-person-add" size={24} color="white" />
+        title: "Settings",
+        tabBarLabel: "Settings",
+        tabBarIcon: <Ionicons name="ios-settings" size={24} color="white" />
       }
     }
   },
   {
-    initialRouteName: "Homepage",
+    initialRouteName: "HomeScreen",
     backBehavior: "none",
     labeled: true
   }
