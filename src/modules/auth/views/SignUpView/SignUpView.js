@@ -1,25 +1,23 @@
 import React from "react";
-import {
-  Text,
-  SafeAreaView,
-  View,
-  TextInput,
-  StyleSheet,
-  Button
-} from "react-native";
+import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
+
+import { Input } from "../../../../base/components/Input";
+import { Button, ButtonLink } from "../../../../base/components/Button";
 
 const SignUpView = props => {
   const { navigate } = props.navigation;
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>SIGN UP</Text>
-        <TextInput style={styles.input} placeholder="login" />
-        <TextInput style={styles.input} placeholder="password" />
-        <TextInput style={styles.input} placeholder="repeat password" />
-        <Button title="SUBMIT" onPress={() => navigate("Main")} />
-        <Text>I have an account: </Text>
-        <Button title="Sign in" onPress={() => navigate("SignIn")} />
+        <Text>Sign up</Text>
+        <Input placeholder="username" />
+        <Input placeholder="e-mail" />
+        <Input placeholder="password" />
+        <Button text="submit" onPress={() => navigate("Home")} />
+      </View>
+      <View style={styles.loginBox}>
+        <Text>Do you have an account? </Text>
+        <ButtonLink text="Sign in" onPress={() => navigate("SignIn")} />
       </View>
     </SafeAreaView>
   );
@@ -32,18 +30,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6"
   },
   container: {
-    padding: 20
+    padding: 20,
+    flex: 1,
+    justifyContent: "center"
   },
-  title: {
-    textAlign: "center",
-    fontSize: 16
-  },
-  input: {
-    height: 60,
-    borderColor: "gray",
-    borderWidth: 1,
-    margin: 10,
-    padding: 10
+  loginBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

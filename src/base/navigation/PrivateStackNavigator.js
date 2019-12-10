@@ -2,11 +2,12 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
-import FriendsScreen from "../screens/FriendsScreen";
+import ConversationsScreen from "../screens/ConversationsScreen";
 import SettingsMenuScreen from "../screens/SettingsMenuScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import { createStackNavigator } from "react-navigation-stack";
+import Colors from "../constants/Colors";
 
 const SettingsStack = createStackNavigator(
   {
@@ -44,11 +45,11 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <Ionicons name="ios-home" size={24} color="white" />
       }
     },
-    Friends: {
-      screen: FriendsScreen,
+    Conversations: {
+      screen: ConversationsScreen,
       navigationOptions: {
-        title: "Friends",
-        tabBarLabel: "Friends",
+        title: "Conversations",
+        tabBarLabel: "Conversations",
         tabBarIcon: <Ionicons name="ios-person-add" size={24} color="white" />
       }
     },
@@ -63,7 +64,11 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
   },
   {
     // TODO: global routes
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    shifting: true,
+    barStyle: {
+      backgroundColor: Colors.blue
+    }
   }
 );
 

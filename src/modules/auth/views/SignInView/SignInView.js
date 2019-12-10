@@ -1,15 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import {
-  Text,
-  SafeAreaView,
-  View,
-  TextInput,
-  StyleSheet,
-  Button
-} from "react-native";
+import { Text, SafeAreaView, View, StyleSheet } from "react-native";
 
 import { authActions } from "../../redux/actions";
+
+import { Input } from "../../../../base/components/Input";
+import { Button, ButtonLink } from "../../../../base/components/Button";
 
 class SignInView extends PureComponent {
   state = {
@@ -26,15 +22,18 @@ class SignInView extends PureComponent {
 
   render() {
     const { navigate } = this.props.navigation;
+    // const { navigation: {navigate} } = this.props
     return (
       <SafeAreaView style={styles.main}>
         <View style={styles.container}>
-          <Text style={styles.title}>SIGN IN</Text>
-          <TextInput style={styles.input} placeholder="login" />
-          <TextInput style={styles.input} placeholder="password" />
-          <Button title="SIGN IN" onPress={() => navigate("Main")} />
-          <Text>I don't have an account: </Text>
-          <Button title="Sign up" onPress={() => navigate("SignUp")} />
+          <Text>Sign in</Text>
+          <Input style={styles.input} placeholder="e-mail" />
+          <Input style={styles.input} placeholder="password" />
+          <Button text="sign in" onPress={() => navigate("Home")} />
+        </View>
+        <View style={styles.registerBox}>
+          <Text>You don't have an account? </Text>
+          <ButtonLink text="Sign up" onPress={() => navigate("SignUp")} />
         </View>
       </SafeAreaView>
     );
@@ -48,18 +47,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6"
   },
   container: {
-    padding: 20
+    padding: 20,
+    flex: 1,
+    justifyContent: "center"
   },
-  title: {
-    textAlign: "center",
-    fontSize: 16
-  },
-  input: {
-    height: 60,
-    borderColor: "gray",
-    borderWidth: 1,
-    margin: 10,
-    padding: 10
+  registerBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

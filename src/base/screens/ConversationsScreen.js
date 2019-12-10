@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, Text } from "react-native";
 
-export default function FriendsScreen() {
+export default function ConversationsScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>MY FRIENDS:</Text>
+      <Text>MY CONVERSATIONS:</Text>
     </SafeAreaView>
   );
 }

@@ -6,13 +6,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   SafeAreaView,
   Button
 } from "react-native";
-
-import { MonoText } from "../components/StyledText";
 
 export default HomeScreen = props => {
   const { navigate } = props.navigation;
@@ -23,13 +20,11 @@ export default HomeScreen = props => {
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>Get started by opening</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          >
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
+          <Text style={styles.getStartedText}>GET STARTED</Text>
+          <Image
+            source={require("../../images/main.png")}
+            style={{ display: "flex", alignSelf: "center", margin: 10 }}
+          />
           <Button title="Log out" onPress={() => navigate("SignIn")}></Button>
         </View>
       </ScrollView>
