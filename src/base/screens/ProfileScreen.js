@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, SafeAreaView, View, StyleSheet, Button } from "react-native";
 
-const HomepageView = props => {
+const ProfileScreen = props => {
   const { navigate } = props.navigation;
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
-        <Text>THIS IS HOMEPAGE</Text>
+        <Text>THIS IS PROFILE SCREEN</Text>
         <Button title="Log out" onPress={() => navigate("SignIn")}></Button>
       </View>
     </SafeAreaView>
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomepageView;
+export default ProfileScreen;
