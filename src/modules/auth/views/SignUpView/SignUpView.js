@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
+import { Spinner } from "native-base";
 
 import { Input } from "../../../../base/components/Input";
 import { Button, ButtonLink } from "../../../../base/components/Button";
-import { Spinner } from "native-base";
 import { authActions } from "../../redux/actions";
 
 class SignUpView extends Component {
@@ -16,6 +16,20 @@ class SignUpView extends Component {
       username: "",
       password: ""
     };
+  }
+
+  componentDidMount() {
+    const { dispatch, currentUser } = this.props;
+    if (!currentUser.token) {
+      dispatch(authActions.getToken());
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentUser, navigation } = this.props;
+    if (!prevProps.currentUser.token && currentUser.token) {
+      navigation.navigate("Home");
+    }
   }
 
   disabledButton = () => {

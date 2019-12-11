@@ -2,7 +2,7 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { REQUEST, SUCCESS, FAILURE } from "../consts";
 import { getError, request } from "../../../common/utils";
 
-export const apiSaga = type => {
+export const apiSaga = (type, onSagaSuccess) => {
   function* callApi(action) {
     try {
       const response = yield call(
@@ -15,6 +15,9 @@ export const apiSaga = type => {
         type: type + SUCCESS,
         data: response.data || response
       });
+      if (onSagaSuccess) {
+        yield* onSagaSuccess(response.data);
+      }
       if (action.afterSagaSuccess) {
         yield call(action.afterSagaSuccess);
       }

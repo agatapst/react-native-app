@@ -1,10 +1,13 @@
 import { apiAction } from "../../../base/redux/utils";
 import { API } from "../../../common/utils/apiUrls";
+import { REQUEST } from "../../../base/redux/consts";
 
 const prefix = "@@auth/";
 
 export const SIGN_UP = `${prefix}SIGN_UP`;
 export const SIGN_IN = `${prefix}SIGN_IN`;
+
+export const TOKEN = `${prefix}TOKEN`;
 
 export const authActions = {
   signUp: (payload, navigation) => {
@@ -22,5 +25,10 @@ export const authActions = {
         navigation.navigate("Home");
       }
     });
+  },
+  getToken: () => {
+    return {
+      type: TOKEN + REQUEST
+    };
   }
 };
