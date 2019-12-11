@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAILURE } from '../consts';
+import { REQUEST, SUCCESS, FAILURE, CLEAR } from '../consts';
 
 const initialState = {
   data: null,
@@ -7,8 +7,8 @@ const initialState = {
 };
 
 export const apiReducer = (type, reduceSuccess) => {
-  const makeTypes = param => [param + REQUEST, param + SUCCESS, param + FAILURE];
-  const [REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE] = makeTypes(type);
+  const makeTypes = param => [param + REQUEST, param + SUCCESS, param + FAILURE, param + CLEAR];
+  const [REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE, CLEAR_TYPE] = makeTypes(type);
 
   return (state = initialState, action) => {
     switch (action.type) {
@@ -39,6 +39,8 @@ export const apiReducer = (type, reduceSuccess) => {
           error: action.error,
           isFetching: false,
         };
+      case CLEAR_TYPE:
+        return initialState;
       default:
         return state;
     }

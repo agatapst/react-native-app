@@ -1,26 +1,67 @@
-import React from "react";
+import React, { Component } from "react";
 import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
+import { connect } from 'react-redux';
 
 import { Input } from "../../../../base/components/Input";
 import { Button, ButtonLink } from "../../../../base/components/Button";
+import { Spinner } from "native-base";
+import { authActions } from "../../redux/actions";
 
-const SignUpView = props => {
-  const { navigate } = props.navigation;
-  return (
-    <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <Text>Sign up</Text>
-        <Input placeholder="username" />
-        <Input placeholder="e-mail" />
-        <Input placeholder="password" />
-        <Button text="submit" onPress={() => navigate("Home")} />
-      </View>
-      <View style={styles.loginBox}>
-        <Text>Do you have an account? </Text>
-        <ButtonLink text="Sign in" onPress={() => navigate("SignIn")} />
-      </View>
-    </SafeAreaView>
-  );
+class SignUpView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      username: '',
+      password: '',
+    }
+  }
+
+  disabledButton = () => {
+    const { email, username, password } = this.state;
+    return email === '' || username === '' || password === '';
+  }
+
+  submitForm = () => {
+    const { dispatch, navigation } = this.props;
+    const { email, username, password } = this.state;
+
+    const payload = {
+      email,
+      username,
+      password
+    };
+
+    dispatch(authActions.signUp(payload, navigation));
+  }
+
+  render() {
+    const {
+      navigation: { navigate },
+      signUp
+    } = this.props;
+    const { email, username, password } = this.state;
+
+    // TODO - add alert with error
+
+    return (
+      <SafeAreaView style={styles.main}>
+        <View style={styles.container}>
+          <Text>Sign up</Text>
+          <Input placeholder="username" value={username} onChangeText={value => this.setState({ username: value })} />
+          <Input placeholder="e-mail" value={email} onChangeText={value => this.setState({ email: value })} />
+          <Input placeholder="password" value={password} onChangeText={value => this.setState({ password: value })} />
+          <Button text="submit" onPress={() => this.submitForm()} disabled={this.disabledButton} />
+          {signUp.isFetching && <Spinner />}
+        </View>
+        <View style={styles.loginBox}>
+          <Text>Do you have an account? </Text>
+          <ButtonLink text="Sign in" onPress={() => navigate("SignIn")} />
+        </View>
+      </SafeAreaView>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -42,8 +83,17 @@ const styles = StyleSheet.create({
   }
 });
 
-SignUpView.defaultProps = {};
+SignUpView.defaultProps = {
+  // TODO add defaultProps
+};
 
-SignUpView.propTypes = {};
+SignUpView.propTypes = {
+  // TODO add propTypes
+};
 
-export default SignUpView;
+
+const mapStateToProps = ({ auth }) => {
+  return auth
+}
+
+export default connect(mapStateToProps)(SignUpView);
