@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import { Input } from "../../../../base/components/Input";
 import { Button, ButtonLink } from "../../../../base/components/Button";
@@ -12,16 +12,16 @@ class SignUpView extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      username: '',
-      password: '',
-    }
+      email: "",
+      username: "",
+      password: ""
+    };
   }
 
   disabledButton = () => {
     const { email, username, password } = this.state;
-    return email === '' || username === '' || password === '';
-  }
+    return email === "" || username === "" || password === "";
+  };
 
   submitForm = () => {
     const { dispatch, navigation } = this.props;
@@ -34,7 +34,7 @@ class SignUpView extends Component {
     };
 
     dispatch(authActions.signUp(payload, navigation));
-  }
+  };
 
   render() {
     const {
@@ -49,10 +49,26 @@ class SignUpView extends Component {
       <SafeAreaView style={styles.main}>
         <View style={styles.container}>
           <Text>Sign up</Text>
-          <Input placeholder="username" value={username} onChangeText={value => this.setState({ username: value })} />
-          <Input placeholder="e-mail" value={email} onChangeText={value => this.setState({ email: value })} />
-          <Input placeholder="password" value={password} onChangeText={value => this.setState({ password: value })} />
-          <Button text="submit" onPress={() => this.submitForm()} disabled={this.disabledButton} />
+          <Input
+            placeholder="username"
+            value={username}
+            onChangeText={value => this.setState({ username: value })}
+          />
+          <Input
+            placeholder="e-mail"
+            value={email}
+            onChangeText={value => this.setState({ email: value })}
+          />
+          <Input
+            placeholder="password"
+            value={password}
+            onChangeText={value => this.setState({ password: value })}
+          />
+          <Button
+            text="submit"
+            onPress={() => this.submitForm()}
+            disabled={this.disabledButton}
+          />
           {signUp.isFetching && <Spinner />}
         </View>
         <View style={styles.loginBox}>
@@ -62,7 +78,7 @@ class SignUpView extends Component {
       </SafeAreaView>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   main: {
@@ -91,9 +107,8 @@ SignUpView.propTypes = {
   // TODO add propTypes
 };
 
-
 const mapStateToProps = ({ auth }) => {
-  return auth
-}
+  return auth;
+};
 
 export default connect(mapStateToProps)(SignUpView);

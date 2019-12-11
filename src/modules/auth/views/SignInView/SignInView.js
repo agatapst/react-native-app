@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Text, SafeAreaView, View, StyleSheet } from "react-native";
 
@@ -7,29 +7,51 @@ import { authActions } from "../../redux/actions";
 import { Input } from "../../../../base/components/Input";
 import { Button, ButtonLink } from "../../../../base/components/Button";
 
-class SignInView extends PureComponent {
-  state = {
-    login: "",
-    password: ""
+class SignInView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  signIn = () => {
+    const { dispatch, navigation } = this.props;
+    const { email, password } = this.state;
+
+    const payload = {
+      email,
+      password
+    };
+
+    dispatch(authActions.signIn(payload, navigation));
   };
-
-  onSubmit = () => {
-    const { dispatch } = this.props;
-    const { login, password } = this.state;
-
-    dispatch(authActions.signUp({ login, password }, mavigation));
-  };
-
   render() {
-    const { navigate } = this.props.navigation;
-    // const { navigation: {navigate} } = this.props
+    const {
+      navigation: { navigate },
+      signIn
+    } = this.props;
+    const { email, password } = this.state;
+
     return (
       <SafeAreaView style={styles.main}>
         <View style={styles.container}>
           <Text>Sign in</Text>
-          <Input style={styles.input} placeholder="e-mail" />
-          <Input style={styles.input} placeholder="password" />
-          <Button text="sign in" onPress={() => navigate("Home")} />
+          <Input
+            style={styles.input}
+            placeholder="email"
+            value={email}
+            onChangeText={value => this.setState({ email: value })}
+          />
+          <Input
+            style={styles.input}
+            placeholder="password"
+            value={password}
+            onChangeText={value => this.setState({ password: value })}
+          />
+          <Button text="sign in" onPress={() => this.signIn()} />
         </View>
         <View style={styles.registerBox}>
           <Text>You don't have an account? </Text>
@@ -59,6 +81,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ auth }) => {
+  return auth;
+};
 
 export default connect(mapStateToProps)(SignInView);
