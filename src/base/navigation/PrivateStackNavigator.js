@@ -8,6 +8,9 @@ import ProfileScreen from "../screens/ProfileScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import { createStackNavigator } from "react-navigation-stack";
 import Colors from "../constants/Colors";
+import Routes from "../constants/Routes";
+
+const { SETTINGS_MENU_ROUTE, HOME_ROUTE, BOTTOM_NAVIGATOR_ROUTE } = Routes;
 
 const SettingsStack = createStackNavigator(
   {
@@ -31,7 +34,7 @@ const SettingsStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "SettingsMenu"
+    initialRouteName: SETTINGS_MENU_ROUTE
   }
 );
 
@@ -63,8 +66,7 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
     }
   },
   {
-    // TODO: global routes
-    initialRouteName: "Home",
+    initialRouteName: HOME_ROUTE,
     shifting: true,
     barStyle: {
       backgroundColor: Colors.blue
@@ -77,7 +79,7 @@ const PrivateStackNavigator = createStackNavigator(
     BottomNavigator: MainTabNavigator
   },
   {
-    initialRouteName: "BottomNavigator",
+    initialRouteName: BOTTOM_NAVIGATOR_ROUTE,
     backBehavior: "none"
   }
 );
