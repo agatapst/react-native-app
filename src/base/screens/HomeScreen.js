@@ -22,7 +22,7 @@ export default HomeScreen = props => {
         <View style={styles.getStartedContainer}>
           <Text style={styles.getStartedText}>GET STARTED</Text>
           <Image
-            source={require("../../images/main.png")}
+            source={require("../../assets/images/main.png")}
             style={{ display: "flex", alignSelf: "center", margin: 10 }}
           />
           <Button title="Log out" onPress={() => navigate("SignIn")}></Button>

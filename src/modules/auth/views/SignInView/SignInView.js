@@ -1,13 +1,18 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Text, SafeAreaView, View, StyleSheet } from "react-native";
+import { Text, View, KeyboardAvoidingView } from "react-native";
 
 import { authActions } from "../../redux/actions";
 
-import { Input } from "../../../../base/components/Input";
-import { Button, ButtonLink } from "../../../../base/components/Button";
+import Input from "../../../../base/components/Input";
+import ActionButton from "../../../../base/components/ActionButton";
+import AuthContainer from "../../../../base/components/AuthContainer";
+import Header from "../../../../base/components/Header";
+import AppText from "../../../../base/components/AppText";
 
-class SignInView extends PureComponent {
+import Styles from "./Styles";
+
+class SignInView extends Component {
   state = {
     login: "",
     password: ""
@@ -17,47 +22,42 @@ class SignInView extends PureComponent {
     const { dispatch } = this.props;
     const { login, password } = this.state;
 
-    dispatch(authActions.signUp({ login, password }, mavigation));
+    dispatch(authActions.signUp({ login, password }, navigation));
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    // const { navigation: {navigate} } = this.props
+    const {
+      navigation: { navigate }
+    } = this.props;
+
+    const { container, registerBox } = Styles;
+
     return (
-      <SafeAreaView style={styles.main}>
-        <View style={styles.container}>
-          <Text>Sign in</Text>
-          <Input style={styles.input} placeholder="e-mail" />
-          <Input style={styles.input} placeholder="password" />
-          <Button text="sign in" onPress={() => navigate("Home")} />
-        </View>
-        <View style={styles.registerBox}>
-          <Text>You don't have an account? </Text>
-          <ButtonLink text="Sign up" onPress={() => navigate("SignUp")} />
-        </View>
-      </SafeAreaView>
+      <KeyboardAvoidingView style={{ flex: 1 }}>
+        <AuthContainer>
+          <View style={container}>
+            <Header>Sign in</Header>
+            <Input placeholder="e-mail" />
+            <Input placeholder="password" secureTextEntry={true} />
+            <ActionButton text="sign in" onPress={() => navigate("Home")} />
+          </View>
+          <View style={registerBox}>
+            <AppText>You don't have an account? </AppText>
+            <ActionButton
+              isLink
+              text="Sign up"
+              onPress={() => navigate("SignUp")}
+            />
+          </View>
+        </AuthContainer>
+      </KeyboardAvoidingView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#e6e6e6"
-  },
-  container: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center"
-  },
-  registerBox: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+SignInView.propTypes = {};
+
+SignInView.defaultProps = {};
 
 const mapStateToProps = () => ({});
 
