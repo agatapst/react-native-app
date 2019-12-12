@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
 import { connect } from 'react-redux';
-
 import { Input } from "../../../../base/components/Input";
 import { Button, ButtonLink } from "../../../../base/components/Button";
 import { Spinner } from "native-base";
@@ -23,7 +22,7 @@ class SignUpView extends Component {
     return email === '' || username === '' || password === '';
   }
 
-  submitForm = () => {
+  submitForm = async () => {
     const { dispatch, navigation } = this.props;
     const { email, username, password } = this.state;
 
