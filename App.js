@@ -17,7 +17,10 @@ store.runSaga(rootSaga);
 async function loadResourcesAsync() {
   await Promise.all([
     Font.loadAsync({
-      ...Ionicons.font
+      ...Ionicons.font,
+      "lato-bold": require("./src/assets/fonts/LatoBold.ttf"),
+      "lato-regular": require("./src/assets/fonts/LatoRegular.ttf"),
+      "lato-light": require("./src/assets/fonts/LatoLight.ttf")
     })
   ]);
 }
