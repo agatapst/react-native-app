@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, KeyboardAvoidingView } from "react-native";
+import PropTypes from "prop-types";
 
 import Input from "../../../../base/components/Input";
 import ActionButton from "../../../../base/components/ActionButton";
@@ -45,8 +46,11 @@ class SignUpView extends Component {
   }
 }
 
-SignUpView.defaultProps = {};
+SignUpView.defaultProps = null;
 
-SignUpView.propTypes = {};
+SignUpView.propTypes = {
+  navigation: PropTypes.object,
+  dispatch: PropTypes.func
+};
 
 export default SignUpView;

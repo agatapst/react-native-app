@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import PropTypes from "prop-types";
 
 import { authActions } from "../../redux/actions";
 
@@ -53,9 +54,12 @@ class SignInView extends Component {
   }
 }
 
-SignInView.propTypes = {};
+SignInView.defaultProps = null;
 
-SignInView.defaultProps = {};
+SignInView.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 
 const mapStateToProps = () => ({});
 
