@@ -1,6 +1,6 @@
-import React from "react";
-import { TextInput } from "react-native";
-import Styles from "./Styles";
+import React from 'react';
+import { TextInput } from 'react-native';
+import Styles from './Styles';
 
 const { input } = Styles;
 

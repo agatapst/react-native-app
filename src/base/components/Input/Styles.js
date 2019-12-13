@@ -1,20 +1,20 @@
-import { StyleSheet } from "react-native";
-import Colors from "../../constants/Colors";
-import Typography from "../../constants/Typography";
+import { StyleSheet } from 'react-native';
+import Colors from '../../constants/Colors';
+import Typography from '../../constants/Typography';
 
 const { gray } = Colors;
 const {
-  fontSize: { regular, big }
+  fontSize: { big },
 } = Typography;
 
 export default StyleSheet.create({
   input: {
     height: 50,
     fontSize: big,
-    fontFamily: "lato-regular",
+    fontFamily: 'lato-regular',
     borderBottomColor: gray,
     borderBottomWidth: 1,
     padding: 5,
-    marginBottom: 15
-  }
+    marginBottom: 15,
+  },
 });

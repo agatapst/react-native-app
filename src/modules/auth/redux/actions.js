@@ -6,12 +6,10 @@ const prefix = '@@auth/';
 export const SIGN_UP = `${prefix}SIGN_UP`;
 
 export const authActions = {
-    signUp: (payload, navigation) => {
-        return apiAction(SIGN_UP, 'POST', urls.SIGN_UP, {
-            payload,
-            afterSagaSuccess: () => {
-                navigation.navigate(LOGIN);
-            },
-        });
+  signUp: (payload, navigation) => apiAction(SIGN_UP, 'POST', urls.SIGN_UP, {
+    payload,
+    afterSagaSuccess: () => {
+      navigation.navigate('SignIn');
     },
+  }),
 };

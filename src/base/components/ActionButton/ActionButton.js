@@ -1,6 +1,7 @@
-import React from "react";
-import { TouchableOpacity, Text } from "react-native";
-import Styles from "./Styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TouchableOpacity, Text } from 'react-native';
+import Styles from './Styles';
 
 export default function ActionButton(props) {
   const { text, onPress, isLink } = props;
@@ -16,3 +17,13 @@ export default function ActionButton(props) {
     </TouchableOpacity>
   );
 }
+
+ActionButton.defaultProps = {
+  isLink: false,
+};
+
+ActionButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  isLink: PropTypes.bool,
+};

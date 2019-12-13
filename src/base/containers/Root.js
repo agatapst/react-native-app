@@ -1,7 +1,7 @@
-import React from "react";
-import { createAppContainer } from "react-navigation";
-import appStack, { navigationUtils } from "../navigation";
-import { Root } from "native-base";
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { Root } from 'native-base';
+import appStack, { navigationUtils } from '../navigation';
 
 const AppContainer = createAppContainer(appStack);
 

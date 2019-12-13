@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
-import { authActions } from "../../redux/actions";
+import { authActions } from '../../redux/actions';
 
-import Input from "../../../../base/components/Input";
-import ActionButton from "../../../../base/components/ActionButton";
-import AuthContainer from "../../../../base/components/AuthContainer";
-import HeaderTitle from "../../../../base/components/HeaderTitle";
-import AppText from "../../../../base/components/AppText";
+import Input from '../../../../base/components/Input';
+import ActionButton from '../../../../base/components/ActionButton';
+import AuthContainer from '../../../../base/components/AuthContainer';
+import HeaderTitle from '../../../../base/components/HeaderTitle';
+import AppText from '../../../../base/components/AppText';
 
-import Styles from "./Styles";
+import Styles from './Styles';
 
 class SignInView extends Component {
   state = {
-    login: "",
-    password: ""
+    login: '',
+    password: '',
   };
 
   onSubmit = () => {
-    const { dispatch } = this.props;
+    const { navigation, dispatch } = this.props;
     const { login, password } = this.state;
 
     dispatch(authActions.signUp({ login, password }, navigation));
@@ -28,7 +28,7 @@ class SignInView extends Component {
 
   render() {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
     } = this.props;
 
     const { container, registerBox } = Styles;
@@ -38,15 +38,15 @@ class SignInView extends Component {
         <View style={container}>
           <HeaderTitle>Sign in</HeaderTitle>
           <Input placeholder="e-mail" />
-          <Input placeholder="password" secureTextEntry={true} />
-          <ActionButton text="sign in" onPress={() => navigate("Home")} />
+          <Input placeholder="password" secureTextEntry />
+          <ActionButton text="sign in" onPress={() => navigate('Home')} />
         </View>
         <View style={registerBox}>
-          <AppText>You don't have an account? </AppText>
+          <AppText>You do not have an account? </AppText>
           <ActionButton
             isLink
             text="Sign up"
-            onPress={() => navigate("SignUp")}
+            onPress={() => navigate('SignUp')}
           />
         </View>
       </AuthContainer>
@@ -54,11 +54,13 @@ class SignInView extends Component {
   }
 }
 
-SignInView.defaultProps = { navigation: null, dispatch: null };
+SignInView.defaultProps = {};
 
 SignInView.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
