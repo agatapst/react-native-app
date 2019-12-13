@@ -54,7 +54,7 @@ class SignInView extends Component {
   }
 }
 
-SignInView.defaultProps = null;
+SignInView.defaultProps = { navigation: null, dispatch: null };
 
 SignInView.propTypes = {
   navigation: PropTypes.object.isRequired,

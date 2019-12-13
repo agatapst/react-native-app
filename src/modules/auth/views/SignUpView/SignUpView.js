@@ -46,7 +46,7 @@ class SignUpView extends Component {
   }
 }
 
-SignUpView.defaultProps = null;
+SignUpView.defaultProps = { navigation: null, dispatch: null };
 
 SignUpView.propTypes = {
   navigation: PropTypes.object,
