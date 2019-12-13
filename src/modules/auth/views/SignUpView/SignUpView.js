@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 import Input from "../../../../base/components/Input";
 import ActionButton from "../../../../base/components/ActionButton";
-import Header from "../../../../base/components/Header";
+import HeaderTitle from "../../../../base/components/HeaderTitle";
 import AppText from "../../../../base/components/AppText";
 import AuthContainer from "../../../../base/components/AuthContainer";
 
@@ -24,7 +24,7 @@ class SignUpView extends Component {
     return (
       <AuthContainer>
         <View style={container}>
-          <Header>Sign up</Header>
+          <HeaderTitle>Sign up</HeaderTitle>
           <Input placeholder="username" />
           <Input placeholder="e-mail" />
           <Input placeholder="password" secureTextEntry={true} />

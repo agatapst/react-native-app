@@ -8,7 +8,7 @@ const {
 const { black } = Colors;
 
 export default StyleSheet.create({
-  header: {
+  headerTitle: {
     fontSize: extraBig,
     color: black,
     marginBottom: 30,

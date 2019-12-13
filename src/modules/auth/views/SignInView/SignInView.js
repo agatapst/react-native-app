@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, KeyboardAvoidingView } from "react-native";
+import { View, KeyboardAvoidingView } from "react-native";
 
 import { authActions } from "../../redux/actions";
 
 import Input from "../../../../base/components/Input";
 import ActionButton from "../../../../base/components/ActionButton";
 import AuthContainer from "../../../../base/components/AuthContainer";
-import Header from "../../../../base/components/Header";
+import HeaderTitle from "../../../../base/components/HeaderTitle";
 import AppText from "../../../../base/components/AppText";
 
 import Styles from "./Styles";
@@ -36,7 +36,7 @@ class SignInView extends Component {
       <KeyboardAvoidingView style={{ flex: 1 }}>
         <AuthContainer>
           <View style={container}>
-            <Header>Sign in</Header>
+            <HeaderTitle>Sign in</HeaderTitle>
             <Input placeholder="e-mail" />
             <Input placeholder="password" secureTextEntry={true} />
             <ActionButton text="sign in" onPress={() => navigate("Home")} />

@@ -4,6 +4,10 @@ import Styles from "./Styles";
 
 const { authContainer } = Styles;
 
-export default function Header(props) {
-  return <SafeAreaView {...props} style={authContainer} />;
+export default function AuthContainer({ props, children }) {
+  return (
+    <SafeAreaView {...props} style={authContainer}>
+      {children}
+    </SafeAreaView>
+  );
 }
