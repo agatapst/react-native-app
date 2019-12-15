@@ -24,6 +24,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'object-curly-newline': 'off',
     'generator-star-spacing': 0,
+    'import/prefer-default-export': 'off',
     'max-len': [
       'error',
       {
