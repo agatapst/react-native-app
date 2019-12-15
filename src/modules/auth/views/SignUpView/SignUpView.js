@@ -1,20 +1,27 @@
-import React, { Component } from "react";
-import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
-import { connect } from "react-redux";
-import { Spinner } from "native-base";
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable arrow-parens */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, KeyboardAvoidingView } from 'react-native';
+import { connect } from 'react-redux';
+import { Spinner } from 'native-base';
+import { authActions } from '../../redux/actions';
 
-import { Input } from "../../../../base/components/Input";
-import { Button, ButtonLink } from "../../../../base/components/Button";
-import { authActions } from "../../redux/actions";
+import HeaderTitle from '../../../../base/components/HeaderTitle';
+import Input from '../../../../base/components/Input';
+import ActionButton from '../../../../base/components/ActionButton';
+import AuthContainer from '../../../../base/components/AuthContainer';
+import AppText from '../../../../base/components/AppText';
+import Styles from './Styles';
 
 class SignUpView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      username: "",
-      password: ""
+      email: '',
+      username: '',
+      password: '',
     };
   }
 
@@ -28,13 +35,13 @@ class SignUpView extends Component {
   componentDidUpdate(prevProps) {
     const { currentUser, navigation } = this.props;
     if (!prevProps.currentUser.token && currentUser.token) {
-      navigation.navigate("Home");
+      navigation.navigate('Home');
     }
   }
 
   disabledButton = () => {
     const { email, username, password } = this.state;
-    return email === "" || username === "" || password === "";
+    return email === '' || username === '' || password === '';
   };
 
   submitForm = () => {
@@ -44,7 +51,7 @@ class SignUpView extends Component {
     const payload = {
       email,
       username,
-      password
+      password,
     };
 
     dispatch(authActions.signUp(payload, navigation));
@@ -53,76 +60,65 @@ class SignUpView extends Component {
   render() {
     const {
       navigation: { navigate },
-      signUp
+      signUp,
     } = this.props;
     const { email, username, password } = this.state;
-
-    // TODO - add alert with error
+    const { container, loginBox, keyboardAvoidingView } = Styles;
 
     return (
-      <SafeAreaView style={styles.main}>
-        <View style={styles.container}>
-          <Text>Sign up</Text>
-          <Input
-            placeholder="username"
-            value={username}
-            onChangeText={value => this.setState({ username: value })}
-          />
-          <Input
-            placeholder="e-mail"
-            value={email}
-            onChangeText={value => this.setState({ email: value })}
-          />
-          <Input
-            placeholder="password"
-            value={password}
-            onChangeText={value => this.setState({ password: value })}
-          />
-          <Button
-            text="submit"
-            onPress={() => this.submitForm()}
-            disabled={this.disabledButton}
-          />
-          {signUp.isFetching && <Spinner />}
-        </View>
-        <View style={styles.loginBox}>
-          <Text>Do you have an account? </Text>
-          <ButtonLink text="Sign in" onPress={() => navigate("SignIn")} />
-        </View>
-      </SafeAreaView>
+      <KeyboardAvoidingView style={keyboardAvoidingView} behavior="padding">
+        <AuthContainer>
+          <View style={container}>
+            <HeaderTitle>Sign up</HeaderTitle>
+            <Input
+              placeholder="username"
+              value={username}
+              onChangeText={value => this.setState({ username: value })}
+              autoCapitalize="none"
+            />
+            <Input
+              placeholder="email"
+              value={email}
+              onChangeText={value => this.setState({ email: value })}
+              autoCapitalize="none"
+            />
+            <Input
+              placeholder="password"
+              value={password}
+              onChangeText={value => this.setState({ password: value })}
+              secureTextEntry
+            />
+            <ActionButton text="submit" onPress={() => this.submitForm()} />
+            {signUp.isFetching && <Spinner />}
+          </View>
+          <View style={loginBox}>
+            <AppText>Do you have an account?</AppText>
+            <ActionButton
+              isLink
+              text="Sign in"
+              onPress={() => navigate('SignIn')}
+            />
+          </View>
+        </AuthContainer>
+      </KeyboardAvoidingView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#e6e6e6"
-  },
-  container: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center"
-  },
-  loginBox: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
-
-SignUpView.defaultProps = {
-  // TODO add defaultProps
-};
+const mapStateToProps = ({ auth }) => auth;
 
 SignUpView.propTypes = {
-  // TODO add propTypes
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool,
+  signUp: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ auth }) => {
-  return auth;
+SignUpView.defaultProps = {
+  isFetching: false,
 };
 
 export default connect(mapStateToProps)(SignUpView);

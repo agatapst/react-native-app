@@ -1,19 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Text, SafeAreaView, View, StyleSheet } from "react-native";
+/* eslint-disable arrow-parens */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
-import { authActions } from "../../redux/actions";
+import { authActions } from '../../redux/actions';
 
-import { Input } from "../../../../base/components/Input";
-import { Button, ButtonLink } from "../../../../base/components/Button";
+import Input from '../../../../base/components/Input';
+import ActionButton from '../../../../base/components/ActionButton';
+import AuthContainer from '../../../../base/components/AuthContainer';
+import HeaderTitle from '../../../../base/components/HeaderTitle';
+import AppText from '../../../../base/components/AppText';
+
+import Styles from './Styles';
 
 class SignInView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     };
   }
 
@@ -23,66 +30,61 @@ class SignInView extends Component {
 
     const payload = {
       email,
-      password
+      password,
     };
 
     dispatch(authActions.signIn(payload, navigation));
   };
+
   render() {
     const {
       navigation: { navigate },
-      signIn
     } = this.props;
+
     const { email, password } = this.state;
 
+    const { container, registerBox } = Styles;
+
     return (
-      <SafeAreaView style={styles.main}>
-        <View style={styles.container}>
-          <Text>Sign in</Text>
+      <AuthContainer>
+        <View style={container}>
+          <HeaderTitle>Sign in</HeaderTitle>
           <Input
-            style={styles.input}
             placeholder="email"
             value={email}
             onChangeText={value => this.setState({ email: value })}
+            autoCapitalize="none"
           />
           <Input
-            style={styles.input}
             placeholder="password"
             value={password}
             onChangeText={value => this.setState({ password: value })}
+            secureTextEntry
           />
-          <Button text="sign in" onPress={() => this.signIn()} />
+          <ActionButton text="sign in" onPress={() => this.signIn()} />
         </View>
-        <View style={styles.registerBox}>
-          <Text>You don't have an account? </Text>
-          <ButtonLink text="Sign up" onPress={() => navigate("SignUp")} />
+        <View style={registerBox}>
+          <AppText>You do not have an account? </AppText>
+          <ActionButton
+            isLink
+            text="Sign up"
+            onPress={() => navigate('SignUp')}
+          />
         </View>
-      </SafeAreaView>
+      </AuthContainer>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#e6e6e6"
-  },
-  container: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center"
-  },
-  registerBox: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+SignInView.defaultProps = {};
 
-const mapStateToProps = ({ auth }) => {
-  return auth;
+SignInView.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = ({ auth }) => auth;
 
 export default connect(mapStateToProps)(SignInView);
