@@ -12,6 +12,7 @@ export default StyleSheet.create({
     fontSize: extraBig,
     color: black,
     marginBottom: 30,
+    marginTop: 10,
     fontFamily: 'lato-bold',
   },
 });
