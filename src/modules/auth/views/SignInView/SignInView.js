@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
@@ -52,13 +51,13 @@ class SignInView extends Component {
           <Input
             placeholder="email"
             value={email}
-            onChangeText={value => this.setState({ email: value })}
+            onChangeText={(value) => this.setState({ email: value })}
             autoCapitalize="none"
           />
           <Input
             placeholder="password"
             value={password}
-            onChangeText={value => this.setState({ password: value })}
+            onChangeText={(value) => this.setState({ password: value })}
             secureTextEntry
           />
           <ActionButton text="sign in" onPress={() => this.signIn()} />
