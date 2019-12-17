@@ -25,6 +25,7 @@ module.exports = {
     'object-curly-newline': 'off',
     'generator-star-spacing': 0,
     'import/prefer-default-export': 'off',
+    'import/no-named-as-default': 0,
     'max-len': [
       'error',
       {
