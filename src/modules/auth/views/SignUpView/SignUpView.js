@@ -1,5 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable arrow-parens */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, KeyboardAvoidingView } from 'react-native';
@@ -73,19 +71,19 @@ class SignUpView extends Component {
             <Input
               placeholder="username"
               value={username}
-              onChangeText={value => this.setState({ username: value })}
+              onChangeText={(value) => this.setState({ username: value })}
               autoCapitalize="none"
             />
             <Input
               placeholder="email"
               value={email}
-              onChangeText={value => this.setState({ email: value })}
+              onChangeText={(value) => this.setState({ email: value })}
               autoCapitalize="none"
             />
             <Input
               placeholder="password"
               value={password}
-              onChangeText={value => this.setState({ password: value })}
+              onChangeText={(value) => this.setState({ password: value })}
               secureTextEntry
             />
             <ActionButton text="SUBMIT" onPress={() => this.submitForm()} />
@@ -112,13 +110,12 @@ SignUpView.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool,
-  signUp: PropTypes.object.isRequired,
+  currentUser: PropTypes.shape({ token: PropTypes.string }).isRequired,
+  signUp: PropTypes.shape({ isFetching: PropTypes.bool }),
 };
 
 SignUpView.defaultProps = {
-  isFetching: false,
+  signUp: false,
 };
 
 export default connect(mapStateToProps)(SignUpView);
