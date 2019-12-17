@@ -11,7 +11,7 @@ export default StyleSheet.create({
   input: {
     height: 50,
     fontSize: big,
-    fontFamily: 'lato-regular',
+    fontFamily: 'dm-sans',
     borderBottomColor: gray,
     borderBottomWidth: 1,
     padding: 5,

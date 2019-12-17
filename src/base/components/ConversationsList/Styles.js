@@ -17,6 +17,6 @@ export default StyleSheet.create({
     fontSize: big,
     marginBottom: 10,
     marginLeft: 15,
-    fontFamily: 'lato-regular',
+    fontFamily: 'dm-sans',
   },
 });

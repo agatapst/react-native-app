@@ -19,9 +19,9 @@ async function loadResourcesAsync() {
   await Promise.all([
     Font.loadAsync({
       ...Ionicons.font,
-      'lato-bold': require('./src/assets/fonts/LatoBold.ttf'),
-      'lato-regular': require('./src/assets/fonts/LatoRegular.ttf'),
-      'lato-light': require('./src/assets/fonts/LatoLight.ttf'),
+      'frank-ruhl': require('./src/assets/fonts/FrankRuhlLibre-Regular.ttf'),
+      'frank-ruhl-bold': require('./src/assets/fonts/FrankRuhlLibre-Bold.ttf'),
+      'dm-sans': require('./src/assets/fonts/DMSans-Regular.ttf'),
     }),
   ]);
 }

@@ -8,6 +8,6 @@ const {
 export default StyleSheet.create({
   appText: {
     fontSize: regular,
-    fontFamily: 'lato-regular',
+    fontFamily: 'dm-sans',
   },
 });

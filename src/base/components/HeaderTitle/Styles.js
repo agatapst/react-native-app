@@ -13,6 +13,6 @@ export default StyleSheet.create({
     color: black,
     marginBottom: 30,
     marginTop: 10,
-    fontFamily: 'lato-bold',
+    fontFamily: 'frank-ruhl-bold',
   },
 });
