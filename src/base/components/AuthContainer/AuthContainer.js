@@ -14,6 +14,12 @@ export default function AuthContainer({ children, ...props }) {
 }
 
 AuthContainer.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+AuthContainer.defaultProps = {
+  children: null,
 };

@@ -1,20 +1,30 @@
-import React from "react";
-import { Image, Text, View, SafeAreaView } from "react-native";
-import ActionButton from "../components/ActionButton";
+import React from 'react';
+import { Text, View, SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types';
+import ActionButton from '../components/ActionButton';
 
-export default HomeScreen = props => {
-  const { navigate } = props.navigation;
+const HomeScreen = ({ ...props }) => {
+  const {
+    navigation: { navigate },
+  } = props;
   return (
     <SafeAreaView>
       <View>
         <ActionButton
           isLink
           text="Log out"
-          onPress={() => navigate("SignIn")}
+          onPress={() => navigate('SignIn')}
         />
         <Text>GET STARTED</Text>
-        <Image source={require("../../assets/images/main.png")} />
       </View>
     </SafeAreaView>
   );
 };
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default HomeScreen;

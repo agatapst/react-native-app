@@ -14,16 +14,25 @@ import AppText from '../../../../base/components/AppText';
 import Styles from './Styles';
 
 class SignInView extends Component {
-  state = {
-    login: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
 
-  onSubmit = () => {
-    const { navigation, dispatch } = this.props;
-    const { login, password } = this.state;
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
-    dispatch(authActions.signUp({ login, password }, navigation));
+  signIn = () => {
+    const { dispatch, navigation } = this.props;
+    const { email, password } = this.state;
+
+    const payload = {
+      email,
+      password,
+    };
+
+    dispatch(authActions.signIn(payload, navigation));
   };
 
   render() {
@@ -31,15 +40,27 @@ class SignInView extends Component {
       navigation: { navigate },
     } = this.props;
 
+    const { email, password } = this.state;
+
     const { container, registerBox } = Styles;
 
     return (
       <AuthContainer>
         <View style={container}>
           <HeaderTitle>Sign in</HeaderTitle>
-          <Input placeholder="e-mail" />
-          <Input placeholder="password" secureTextEntry />
-          <ActionButton text="sign in" onPress={() => navigate('Home')} />
+          <Input
+            placeholder="email"
+            value={email}
+            onChangeText={(value) => this.setState({ email: value })}
+            autoCapitalize="none"
+          />
+          <Input
+            placeholder="password"
+            value={password}
+            onChangeText={(value) => this.setState({ password: value })}
+            secureTextEntry
+          />
+          <ActionButton text="sign in" onPress={() => this.signIn()} />
         </View>
         <View style={registerBox}>
           <AppText>You do not have an account? </AppText>
@@ -63,6 +84,6 @@ SignInView.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ auth }) => auth;
 
 export default connect(mapStateToProps)(SignInView);
