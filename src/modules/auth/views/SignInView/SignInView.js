@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { authActions } from '../../redux/actions';
 
 import Input from '../../../../base/components/Input';
+import PasswordInput from '../../../../base/components/PasswordInput';
 import ActionButton from '../../../../base/components/ActionButton';
 import AuthContainer from '../../../../base/components/AuthContainer';
 import HeaderTitle from '../../../../base/components/HeaderTitle';
@@ -54,11 +55,13 @@ class SignInView extends Component {
             onChangeText={(value) => this.setState({ email: value })}
             autoCapitalize="none"
           />
-          <Input
+          <PasswordInput
+            isError
+            isPassword
+            errorMessage="This field cannot be empty"
             placeholder="password"
             value={password}
             onChangeText={(value) => this.setState({ password: value })}
-            secureTextEntry
           />
           <ActionButton text="SIGN IN" onPress={() => this.signIn()} />
         </View>
