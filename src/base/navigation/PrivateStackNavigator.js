@@ -67,9 +67,9 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
   },
   {
     initialRouteName: HOME_ROUTE,
-    shifting: true,
+
     barStyle: {
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.brightRed,
     },
   },
 );

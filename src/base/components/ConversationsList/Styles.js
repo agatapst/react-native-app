@@ -2,12 +2,21 @@ import { StyleSheet } from 'react-native';
 import Typography from '../../constants/Typography';
 
 const {
-  fontSize: { regular },
+  fontSize: { big },
 } = Typography;
 
 export default StyleSheet.create({
-  appText: {
-    fontSize: regular,
+  list: {
+    flex: 1,
+  },
+  listBox: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  listElement: {
+    fontSize: big,
+    marginBottom: 10,
+    marginLeft: 15,
     fontFamily: 'dm-sans',
   },
 });

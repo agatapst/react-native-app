@@ -6,6 +6,7 @@ import { apiReducer } from '../../../base/redux/utils';
 const currentUserInitialState = {
   token: null,
 };
+
 function currentUserReducer(state = currentUserInitialState, action) {
   switch (action.type) {
     case SIGN_IN + SUCCESS:

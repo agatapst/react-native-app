@@ -5,24 +5,24 @@ import Typography from '../../constants/Typography';
 const {
   fontSize: { big, regular },
 } = Typography;
-const { white, red, blue } = Colors;
+const { white, brightRed } = Colors;
 
 export default StyleSheet.create({
   textStyle: {
-    fontFamily: 'lato-regular',
+    fontFamily: 'dm-sans',
     fontSize: big,
     color: white,
     textAlign: 'center',
   },
   buttonStyle: {
     padding: 10,
-    backgroundColor: red,
+    backgroundColor: brightRed,
     borderRadius: 5,
     marginTop: 30,
   },
   textLinkStyle: {
     fontSize: regular,
-    color: blue,
+    color: brightRed,
   },
   buttonLinkStyle: {
     padding: 0,

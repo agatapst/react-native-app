@@ -60,7 +60,7 @@ class SignInView extends Component {
             onChangeText={(value) => this.setState({ password: value })}
             secureTextEntry
           />
-          <ActionButton text="sign in" onPress={() => this.signIn()} />
+          <ActionButton text="SIGN IN" onPress={() => this.signIn()} />
         </View>
         <View style={registerBox}>
           <AppText>You do not have an account? </AppText>

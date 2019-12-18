@@ -6,4 +6,10 @@ export default {
   white: '#FFFFFF',
   gray: '#888888',
   black: '#000000',
+  brightRed: '#EE5A45',
+  sunnyYellow: '#FDF4D7',
+  cream: '#F5EDEB',
+  orange: '#F79F69',
+  warmGrey: '#D2CBCB',
+  lightCream: '#FAF6F5',
 };

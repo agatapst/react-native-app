@@ -86,7 +86,7 @@ class SignUpView extends Component {
               onChangeText={(value) => this.setState({ password: value })}
               secureTextEntry
             />
-            <ActionButton text="submit" onPress={() => this.submitForm()} />
+            <ActionButton text="SUBMIT" onPress={() => this.submitForm()} />
             {signUp.isFetching && <Spinner />}
           </View>
           <View style={loginBox}>

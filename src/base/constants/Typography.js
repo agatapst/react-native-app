@@ -4,6 +4,6 @@ export default {
     medium: 12,
     regular: 14,
     big: 18,
-    extraBig: 36,
+    extraBig: 38,
   },
 };

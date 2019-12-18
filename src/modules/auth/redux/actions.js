@@ -18,12 +18,13 @@ export const authActions = {
         navigation.navigate('SignIn');
       },
     }),
-  signIn: (payload, navigation) => apiAction(SIGN_IN, 'POST', API.SIGN_IN, {
-    payload,
-    afterSagaSuccess: () => {
-      navigation.navigate('Home');
-    },
-  }),
+  signIn: (payload, navigation) =>
+    apiAction(SIGN_IN, 'POST', API.SIGN_IN, {
+      payload,
+      afterSagaSuccess: () => {
+        navigation.navigate('Home');
+      },
+    }),
   getToken: () => ({
     type: TOKEN + REQUEST,
   }),
