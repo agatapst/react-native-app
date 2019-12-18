@@ -5,7 +5,7 @@ import Styles from './Styles';
 
 const { screenContainer } = Styles;
 
-export default function AuthContainer({ children, ...props }) {
+export default function ScreenContainer({ children, ...props }) {
   return (
     <SafeAreaView {...props} style={screenContainer}>
       {children}
@@ -13,7 +13,13 @@ export default function AuthContainer({ children, ...props }) {
   );
 }
 
-AuthContainer.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.array.isRequired,
+ScreenContainer.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+ScreenContainer.defaultProps = {
+  children: null,
 };
