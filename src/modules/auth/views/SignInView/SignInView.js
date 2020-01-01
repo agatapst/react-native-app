@@ -26,14 +26,17 @@ class SignInView extends Component {
 
   signIn = () => {
     const { dispatch, navigation } = this.props;
+
     const { email, password } = this.state;
 
-    const payload = {
-      email,
-      password,
-    };
+    if (email && password) {
+      const payload = {
+        email,
+        password,
+      };
 
-    dispatch(authActions.signIn(payload, navigation));
+      dispatch(authActions.signIn(payload, navigation));
+    }
   };
 
   render() {
@@ -56,9 +59,7 @@ class SignInView extends Component {
             autoCapitalize="none"
           />
           <PasswordInput
-            isError
             isPassword
-            errorMessage="This field cannot be empty"
             placeholder="password"
             value={password}
             onChangeText={(value) => this.setState({ password: value })}

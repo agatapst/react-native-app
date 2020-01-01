@@ -10,7 +10,7 @@ export default function PasswordInput(props) {
 
   const { autoCompleteType, isPassword, errorMessage, isError, value } = props;
 
-  const { container, error, input } = Styles;
+  const { container, error, input, icon } = Styles;
 
   const showPassword = () => {
     setIsSecure(!isSecure);
@@ -19,6 +19,7 @@ export default function PasswordInput(props) {
   return (
     <View style={container}>
       <TextInput
+        blurOnSubmit={false}
         value={value}
         autoCapitalize="none"
         autoCompleteType={autoCompleteType}
@@ -29,20 +30,11 @@ export default function PasswordInput(props) {
       />
 
       {isPassword && isSecure ? (
-        <TouchableOpacity
-          onPress={showPassword}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
+        <TouchableOpacity onPress={showPassword} style={icon}>
           <Ionicons name="ios-eye-off" size={24} color="grey" />
         </TouchableOpacity>
       ) : isPassword ? (
-        <TouchableOpacity
-          onPress={showPassword}
-          style={{ display: 'flex', justifyContent: 'center' }}
-        >
+        <TouchableOpacity onPress={showPassword} style={icon}>
           <Ionicons name="ios-eye" size={24} color="grey" />
         </TouchableOpacity>
       ) : null}
