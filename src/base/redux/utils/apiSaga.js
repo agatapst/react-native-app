@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import { REQUEST, SUCCESS, FAILURE } from "../consts";
-import { getError, request } from "../../../common/utils";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { REQUEST, SUCCESS, FAILURE } from '../consts';
+import { getError, request } from '../../../common/utils';
 
 export const apiSaga = (type, onSagaSuccess) => {
   function* callApi(action) {
@@ -9,11 +9,11 @@ export const apiSaga = (type, onSagaSuccess) => {
         request,
         action.method,
         action.endpoint,
-        action.payload
+        action.payload,
       );
       yield put({
         type: type + SUCCESS,
-        data: response.data || response
+        data: response.data || response,
       });
       if (onSagaSuccess) {
         yield* onSagaSuccess(response.data);
@@ -25,7 +25,7 @@ export const apiSaga = (type, onSagaSuccess) => {
       const error = getError(e);
       yield put({
         type: type + FAILURE,
-        error
+        error,
       });
       if (action.afterSagaFailure) {
         yield call(action.afterSagaFailure, error);
@@ -33,6 +33,7 @@ export const apiSaga = (type, onSagaSuccess) => {
     }
   }
 
+  // eslint-disable-next-line func-names
   return function*() {
     yield takeEvery(type + REQUEST, callApi);
   };
