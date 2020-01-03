@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import Typography from '../../constants/Typography';
 
 const {
-  fontSize: { big },
+  fontSize: { big, headerBig },
 } = Typography;
 
 export default StyleSheet.create({
@@ -13,10 +13,13 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
-  listElement: {
-    fontSize: big,
-    marginBottom: 10,
-    marginLeft: 15,
+  listElementHeader: {
+    fontSize: headerBig,
+    marginBottom: 4,
+    fontFamily: 'frank-ruhl-bold',
+  },
+  listElementDescription: {
     fontFamily: 'dm-sans',
+    fontSize: big,
   },
 });

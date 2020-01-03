@@ -1,35 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, FlatList, View, Image } from 'react-native';
-import Badge from '../Badge';
+import { FlatList } from 'react-native';
 import Styles from './Styles';
+import DishItem from '../DishItem/DishItem';
 
 export default function DishesList(props) {
   const { dishes } = props;
-  const { list, listElement, listBox } = Styles;
+  const { list } = Styles;
 
   return (
     <FlatList
       style={list}
       data={dishes.data}
       renderItem={({ item }) => (
-        <View>
-          <Image
-            style={{ height: 150, width: 400 }}
-            source={require('../../../assets/images/dish.jpeg')}
-          />
-          <View style={listBox}>
-            <Text style={listElement}>{item.id}</Text>
-            <Text style={listElement}>{item.name}</Text>
-            <Text style={listElement}>{item.description}</Text>
-            <View style={{ display: 'inline-flex' }}>
-              {item.isVegan && <Badge>Vegan</Badge>}
-              {item.isVegetarian && <Badge>Vegetarian</Badge>}
-              {item.isGlutenFree && <Badge>Glutenfree</Badge>}
-              {item.isLactoseFree && <Badge>Lactosefree</Badge>}
-            </View>
-          </View>
-        </View>
+        <DishItem
+          name={item.name}
+          description={item.description}
+          preparationTime={item.preparationTime}
+          portions={item.portions}
+          isVegan={item.isVegan}
+          isVegetarian={item.isVegetarian}
+          isGlutenFree={item.isGlutenFree}
+          isLactoseFree={item.isLactoseFree}
+        />
       )}
     />
   );

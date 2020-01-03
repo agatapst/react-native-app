@@ -5,9 +5,9 @@ import { Spinner } from 'native-base';
 import { ScrollView, View } from 'react-native';
 import DishesList from '../components/DishesList';
 import HeaderTitle from '../components/HeaderTitle';
-import Input from '../components/Input';
 import ScreenContainer from '../components/ScreenContainer';
 import { getDishes as getDishesAction } from '../../modules/dishes/redux/actions';
+import SearchBar from '../components/SearchBar';
 
 export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
   useEffect(() => {
@@ -18,9 +18,9 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
     <ScrollView>
       <ScreenContainer>
         <View>
-          <Input />
-          <View style={{ backgroundColor: 'pink', padding: 16 }}>
-            <HeaderTitle>Dishes:</HeaderTitle>
+          <SearchBar placeholder="Search for a recipe" />
+          <View style={{ backgroundColor: '#FAF6F5', padding: 16 }}>
+            <HeaderTitle>Choose a recipe:</HeaderTitle>
             {isFetching && <Spinner />}
             {data && <DishesList dishes={data} />}
           </View>
