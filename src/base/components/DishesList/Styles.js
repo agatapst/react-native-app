@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   listBox: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   listElement: {
     fontSize: big,

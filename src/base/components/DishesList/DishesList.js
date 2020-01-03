@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, FlatList, View, Image } from 'react-native';
+import Badge from '../Badge';
 import Styles from './Styles';
 
 export default function DishesList(props) {
@@ -21,6 +22,12 @@ export default function DishesList(props) {
             <Text style={listElement}>{item.id}</Text>
             <Text style={listElement}>{item.name}</Text>
             <Text style={listElement}>{item.description}</Text>
+            <View style={{ display: 'inline-flex' }}>
+              {item.isVegan && <Badge>Vegan</Badge>}
+              {item.isVegetarian && <Badge>Vegetarian</Badge>}
+              {item.isGlutenFree && <Badge>Glutenfree</Badge>}
+              {item.isLactoseFree && <Badge>Lactosefree</Badge>}
+            </View>
           </View>
         </View>
       )}

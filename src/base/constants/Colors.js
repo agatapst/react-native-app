@@ -4,7 +4,7 @@ export default {
   lightGrey: '#E6E6E6',
   red: '#EA472C',
   white: '#FFFFFF',
-  gray: '#888888',
+  gray: '#7A7474',
   black: '#000000',
   brightRed: '#EE5A45',
   sunnyYellow: '#FDF4D7',
