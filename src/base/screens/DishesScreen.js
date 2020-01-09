@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Spinner } from 'native-base';
@@ -14,15 +14,30 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
     dispatch(getDishesAction());
   }, []);
 
+  const [filteredDishesList, setFilteredDishesList] = useState([]);
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const filterQuery = query || '';
+    if (data) {
+      const filteredDishes = data.data.filter((dish) => dish.name.toLowerCase().includes(filterQuery.toLowerCase()));
+      setFilteredDishesList(filteredDishes);
+    }
+  }, [data, query]);
+
   return (
     <ScrollView>
       <ScreenContainer>
         <View>
-          <SearchBar placeholder="Search for a recipe" />
+          <SearchBar
+            value={query}
+            onChangeText={(text) => setQuery(text)}
+            placeholder="Search for a recipe"
+          />
           <View style={{ backgroundColor: '#FAF6F5', padding: 16 }}>
             <HeaderTitle>Choose a recipe:</HeaderTitle>
             {isFetching && <Spinner />}
-            {data && <DishesList dishes={data} />}
+            {filteredDishesList && <DishesList dishes={filteredDishesList} />}
           </View>
         </View>
       </ScreenContainer>

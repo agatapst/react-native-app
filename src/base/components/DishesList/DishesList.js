@@ -11,7 +11,7 @@ export default function DishesList(props) {
   return (
     <FlatList
       style={list}
-      data={dishes.data}
+      data={dishes}
       renderItem={({ item }) => (
         <DishItem
           name={item.name}

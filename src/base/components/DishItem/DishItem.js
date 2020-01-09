@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
 import Styles from './Styles';
 
@@ -25,6 +25,7 @@ export default function DishItem(props) {
     badges,
     icon,
     row,
+    iconsRow,
     additionalInfo,
   } = Styles;
 
@@ -35,9 +36,11 @@ export default function DishItem(props) {
         source={require('../../../assets/images/dish.jpeg')}
       />
       <View style={listBox}>
-        <Text style={listElementHeader}>{name}</Text>
+        <TouchableOpacity>
+          <Text style={listElementHeader}>{name}</Text>
+        </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
-        <View style={row}>
+        <View style={[row, iconsRow]}>
           <View style={row}>
             <Image
               source={require('../../../assets/images/time.png')}

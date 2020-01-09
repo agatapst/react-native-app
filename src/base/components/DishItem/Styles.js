@@ -16,6 +16,7 @@ export default StyleSheet.create({
   listBox: {
     display: 'flex',
     flexDirection: 'column',
+    marginLeft: 10,
   },
   listElementHeader: {
     fontSize: headerBig,
@@ -42,10 +43,10 @@ export default StyleSheet.create({
     width: 16,
     height: 16,
     marginRight: 5,
-    marginLeft: 10,
   },
   row: {
     flexDirection: 'row',
+    marginRight: 10,
   },
   additionalInfo: {
     fontFamily: 'dm-sans',

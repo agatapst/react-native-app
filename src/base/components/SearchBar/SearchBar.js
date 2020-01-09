@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Styles from './Styles';
 
 const { container, input } = Styles;
+
 export default function SearchBar(props) {
   return (
     <View style={container}>
