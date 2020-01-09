@@ -4,8 +4,7 @@ import { FlatList } from 'react-native';
 import Styles from './Styles';
 import DishItem from '../DishItem/DishItem';
 
-export default function DishesList(props) {
-  const { dishes } = props;
+export default function DishesList({ dishes, ...props }) {
   const { list } = Styles;
 
   return (
@@ -24,6 +23,7 @@ export default function DishesList(props) {
           isLactoseFree={item.isLactoseFree}
         />
       )}
+      {...props}
     />
   );
 }
