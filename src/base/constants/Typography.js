@@ -4,6 +4,7 @@ export default {
     medium: 12,
     regular: 14,
     big: 18,
+    headerBig: 22,
     extraBig: 38,
   },
 };

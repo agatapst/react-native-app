@@ -1,20 +1,20 @@
-import { REQUEST, SUCCESS, FAILURE, CLEAR } from "../consts";
+import { REQUEST, SUCCESS, FAILURE, CLEAR } from '../consts';
 
 const initialState = {
   data: null,
   error: null,
-  isFetching: false
+  isFetching: false,
 };
 
 export const apiReducer = (type, reduceSuccess) => {
-  const makeTypes = param => [
+  const makeTypes = (param) => [
     param + REQUEST,
     param + SUCCESS,
     param + FAILURE,
-    param + CLEAR
+    param + CLEAR,
   ];
   const [REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE, CLEAR_TYPE] = makeTypes(
-    type
+    type,
   );
 
   return (state = initialState, action) => {
@@ -22,13 +22,13 @@ export const apiReducer = (type, reduceSuccess) => {
       case REQUEST_TYPE:
         return {
           ...state,
-          isFetching: true
+          isFetching: true,
         };
       case SUCCESS_TYPE: {
         const nextState = {
           ...state,
           error: null,
-          isFetching: false
+          isFetching: false,
         };
         if (reduceSuccess) {
           return reduceSuccess(nextState, action);
@@ -37,14 +37,14 @@ export const apiReducer = (type, reduceSuccess) => {
           ...nextState,
           error: null,
           data: action.data,
-          isFetching: false
+          isFetching: false,
         };
       }
       case FAILURE_TYPE:
         return {
           ...state,
           error: action.error,
-          isFetching: false
+          isFetching: false,
         };
       case CLEAR_TYPE:
         return initialState;

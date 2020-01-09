@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
-import ConversationsScreen from '../screens/ConversationsScreen';
+import DishesScreen from '../screens/DishesScreen';
 import SettingsMenuScreen from '../screens/SettingsMenuScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
@@ -48,12 +48,12 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <Ionicons name="ios-home" size={24} color="white" />,
       },
     },
-    Conversations: {
-      screen: ConversationsScreen,
+    Dishes: {
+      screen: DishesScreen,
       navigationOptions: {
-        title: 'Conversations',
-        tabBarLabel: 'Conversations',
-        tabBarIcon: <Ionicons name="ios-person-add" size={24} color="white" />,
+        title: 'Dishes',
+        tabBarLabel: 'Dishes',
+        tabBarIcon: <Ionicons name="ios-pizza" size={24} color="white" />,
       },
     },
     Settings: {
