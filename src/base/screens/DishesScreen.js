@@ -1,3 +1,4 @@
+/* eslint-disable function-paren-newline */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -20,7 +21,9 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
   useEffect(() => {
     const filterQuery = query || '';
     if (data) {
-      const filteredDishes = data.data.filter((dish) => dish.name.toLowerCase().includes(filterQuery.toLowerCase()));
+      const filteredDishes = data.data.filter((dish) =>
+        dish.name.toLowerCase().includes(filterQuery.toLowerCase()),
+      );
       setFilteredDishesList(filteredDishes);
     }
   }, [data, query]);
@@ -47,7 +50,9 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
 
 DishesScreen.propTypes = {
   getDishes: PropTypes.shape({
-    data: PropTypes.array,
+    data: PropTypes.shape({
+      data: PropTypes.array,
+    }),
     error: PropTypes.object,
     isFetching: PropTypes.bool,
   }).isRequired,
