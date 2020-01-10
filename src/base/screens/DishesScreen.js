@@ -12,9 +12,16 @@ import SearchBar from '../components/SearchBar';
 
 const DISHES_PER_PAGE = 3;
 
-export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
+export const DishesScreen = ({
+  getDishes: { isFetching, data },
+  dispatch,
+  ...props
+}) => {
   const [page, setPage] = useState(0);
   const [query, setQuery] = useState('');
+  const {
+    navigation: { navigate },
+  } = props;
 
   useEffect(() => {
     dispatch(getDishesAction({ page: 0, perPage: DISHES_PER_PAGE }));
@@ -58,6 +65,7 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
                 dishes={data.data}
                 onEndReached={loadMoreDishes}
                 onEndReachedThreshold={0.5}
+                onPress={() => navigate('Home')}
               />
             )}
           </View>
@@ -77,6 +85,9 @@ DishesScreen.propTypes = {
     isFetching: PropTypes.bool,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = ({ dishes }) => dishes;

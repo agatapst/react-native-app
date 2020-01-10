@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import Styles from './Styles';
 import DishItem from '../DishItem/DishItem';
 
-export default function DishesList({ dishes, ...props }) {
+export default function DishesList({ dishes, onPress, ...props }) {
   const { list } = Styles;
 
   return (
@@ -22,6 +22,7 @@ export default function DishesList({ dishes, ...props }) {
           isGlutenFree={item.isGlutenFree}
           isLactoseFree={item.isLactoseFree}
           image={item.image}
+          onPress={() => onPress(item.id)}
         />
       )}
       {...props}
@@ -31,4 +32,5 @@ export default function DishesList({ dishes, ...props }) {
 
 DishesList.propTypes = {
   dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onPress: PropTypes.func.isRequired,
 };

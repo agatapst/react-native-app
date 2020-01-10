@@ -16,6 +16,7 @@ export default function DishItem(props) {
     isGlutenFree,
     isLactoseFree,
     image,
+    onPress,
   } = props;
   const {
     listElementHeader,
@@ -39,7 +40,7 @@ export default function DishItem(props) {
         style={img}
       />
       <View style={listBox}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <Text style={listElementHeader}>{name}</Text>
         </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
@@ -80,4 +81,5 @@ DishItem.propTypes = {
   isGlutenFree: PropTypes.bool.isRequired,
   isLactoseFree: PropTypes.bool.isRequired,
   image: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
