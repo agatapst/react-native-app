@@ -35,7 +35,7 @@ export default StyleSheet.create({
     marginTop: 8,
     marginBottom: 10,
   },
-  image: {
+  img: {
     height: 165,
     width: '100%',
   },

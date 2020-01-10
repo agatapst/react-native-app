@@ -21,6 +21,7 @@ export default function DishesList({ dishes, ...props }) {
           isVegetarian={item.isVegetarian}
           isGlutenFree={item.isGlutenFree}
           isLactoseFree={item.isLactoseFree}
+          image={item.image}
         />
       )}
       {...props}
