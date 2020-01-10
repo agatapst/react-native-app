@@ -4,13 +4,19 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
 import DishesScreen from '../screens/DishesScreen';
+import DishScreen from '../screens/DishScreen';
 import SettingsMenuScreen from '../screens/SettingsMenuScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
 import Routes from '../constants/Routes';
 
-const { SETTINGS_MENU_ROUTE, HOME_ROUTE, BOTTOM_NAVIGATOR_ROUTE } = Routes;
+const {
+  SETTINGS_MENU_ROUTE,
+  HOME_ROUTE,
+  BOTTOM_NAVIGATOR_ROUTE,
+  DISHES_ROUTE,
+} = Routes;
 
 const SettingsStack = createStackNavigator(
   {
@@ -38,6 +44,26 @@ const SettingsStack = createStackNavigator(
   },
 );
 
+const DishesStack = createStackNavigator(
+  {
+    Dishes: {
+      screen: DishesScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Dish: {
+      screen: DishScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+  },
+  {
+    initialRouteName: DISHES_ROUTE,
+  },
+);
+
 const MainTabNavigator = createMaterialBottomTabNavigator(
   {
     Home: {
@@ -49,7 +75,7 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
       },
     },
     Dishes: {
-      screen: DishesScreen,
+      screen: DishesStack,
       navigationOptions: {
         title: 'Dishes',
         tabBarLabel: 'Dishes',

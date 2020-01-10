@@ -10,23 +10,42 @@ import ScreenContainer from '../components/ScreenContainer';
 import { getDishes as getDishesAction } from '../../modules/dishes/redux/actions';
 import SearchBar from '../components/SearchBar';
 
-export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
+const DISHES_PER_PAGE = 3;
+
+export const DishesScreen = ({
+  getDishes: { isFetching, data },
+  dispatch,
+  ...props
+}) => {
+  const [page, setPage] = useState(0);
+  const [query, setQuery] = useState('');
+  const {
+    navigation: { navigate },
+  } = props;
+
   useEffect(() => {
-    dispatch(getDishesAction());
+    dispatch(getDishesAction({ page: 0, perPage: DISHES_PER_PAGE }));
   }, []);
 
-  const [filteredDishesList, setFilteredDishesList] = useState([]);
-  const [query, setQuery] = useState('');
+  const searchDishes = () => {
+    setPage(0);
+    dispatch(getDishesAction({ page: 0, perPage: DISHES_PER_PAGE, query }));
+  };
 
-  useEffect(() => {
-    const filterQuery = query || '';
-    if (data) {
-      const filteredDishes = data.data.filter((dish) =>
-        dish.name.toLowerCase().includes(filterQuery.toLowerCase()),
+  const loadMoreDishes = () => {
+    if (!isFetching && data.data.length < data.total) {
+      const newPage = page + 1;
+      setPage(newPage);
+      dispatch(
+        getDishesAction({
+          page: newPage,
+          perPage: DISHES_PER_PAGE,
+          query,
+          loadMore: true,
+        }),
       );
-      setFilteredDishesList(filteredDishes);
     }
-  }, [data, query]);
+  };
 
   return (
     <ScrollView>
@@ -35,12 +54,20 @@ export const DishesScreen = ({ getDishes: { isFetching, data }, dispatch }) => {
           <SearchBar
             value={query}
             onChangeText={(text) => setQuery(text)}
+            onEndEditing={searchDishes}
             placeholder="Search for a recipe"
           />
           <View style={{ backgroundColor: '#FAF6F5', padding: 16 }}>
             <HeaderTitle>Choose a recipe:</HeaderTitle>
-            {isFetching && <Spinner />}
-            {filteredDishesList && <DishesList dishes={filteredDishesList} />}
+            {isFetching && !data && <Spinner />}
+            {data && (
+              <DishesList
+                dishes={data.data}
+                onEndReached={loadMoreDishes}
+                onEndReachedThreshold={0.5}
+                onPress={() => navigate('Home')}
+              />
+            )}
           </View>
         </View>
       </ScreenContainer>
@@ -52,11 +79,15 @@ DishesScreen.propTypes = {
   getDishes: PropTypes.shape({
     data: PropTypes.shape({
       data: PropTypes.array,
+      total: PropTypes.number,
     }),
     error: PropTypes.object,
     isFetching: PropTypes.bool,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = ({ dishes }) => dishes;

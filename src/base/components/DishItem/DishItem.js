@@ -15,15 +15,17 @@ export default function DishItem(props) {
     isVegetarian,
     isGlutenFree,
     isLactoseFree,
+    image,
+    onPress,
   } = props;
   const {
     listElementHeader,
     listElementDescription,
     listBox,
-    image,
     container,
     badges,
     icon,
+    img,
     row,
     iconsRow,
     additionalInfo,
@@ -32,11 +34,13 @@ export default function DishItem(props) {
   return (
     <View style={container}>
       <Image
-        style={image}
-        source={require('../../../assets/images/dish.jpeg')}
+        source={{
+          uri: `http://localhost:3000/dish-image/${image}`,
+        }}
+        style={img}
       />
       <View style={listBox}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <Text style={listElementHeader}>{name}</Text>
         </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
@@ -76,4 +80,6 @@ DishItem.propTypes = {
   isVegetarian: PropTypes.bool.isRequired,
   isGlutenFree: PropTypes.bool.isRequired,
   isLactoseFree: PropTypes.bool.isRequired,
+  image: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };

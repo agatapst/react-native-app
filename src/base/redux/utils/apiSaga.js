@@ -14,6 +14,7 @@ export const apiSaga = (type, onSagaSuccess) => {
       yield put({
         type: type + SUCCESS,
         data: response.data || response,
+        loadMore: action.loadMore,
       });
       if (onSagaSuccess) {
         yield* onSagaSuccess(response.data);

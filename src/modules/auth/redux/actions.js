@@ -1,4 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
 import { apiAction } from '../../../base/redux/utils';
 import { API } from '../../../common/utils/apiUrls';
 import { REQUEST } from '../../../base/redux/consts';
