@@ -4,7 +4,7 @@ import { API } from '../../../common/utils/apiUrls';
 const prefix = '@@dishes/';
 
 export const GET_DISHES = `${prefix}GET_DISHES`;
-export const GET_DISH = `${prefix}GET_DISH`;
+export const GET_SINGLE_DISH = `${prefix}GET_SINGLE_DISH`;
 
 export const getDishes = ({
   page = 0,
@@ -19,5 +19,5 @@ export const getDishes = ({
     { loadMore },
   );
 
-export const getDish = (id) =>
-  apiAction(GET_DISHES, 'GET', `${API.GET_DISH}/${id}`);
+export const getSingleDish = (id) =>
+  apiAction(GET_SINGLE_DISH, 'GET', `${API.GET_DISHES}/${id}`);

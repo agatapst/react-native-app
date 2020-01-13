@@ -1,6 +1,6 @@
 import { REQUEST } from '../consts';
 
-export const apiAction = (type, method, endpoint, options) => ({
+export const apiAction = (type, method, endpoint, options = {}) => ({
   type: type + REQUEST,
   method,
   endpoint,
