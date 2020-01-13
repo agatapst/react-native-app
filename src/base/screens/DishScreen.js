@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import ActionButton from '../components/ActionButton';
+import IngredientsList from '../components/IngredientsList';
 
 const DishScreen = ({ ...props }) => {
   const {
@@ -15,7 +16,8 @@ const DishScreen = ({ ...props }) => {
           text="Log out"
           onPress={() => navigate('SignIn')}
         />
-        <Text>GET STARTED</Text>
+        <Text>I AM DISH SCREEN</Text>
+        <IngredientsList />
       </View>
     </SafeAreaView>
   );

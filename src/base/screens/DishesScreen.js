@@ -65,7 +65,7 @@ export const DishesScreen = ({
                 dishes={data.data}
                 onEndReached={loadMoreDishes}
                 onEndReachedThreshold={0.5}
-                onPress={() => navigate('Home')}
+                onPress={() => navigate('Dish')}
               />
             )}
           </View>
