@@ -5,13 +5,21 @@ import { Text, View, FlatList, Image } from 'react-native';
 import Styles from './Styles';
 import HeaderTitle from '../HeaderTitle';
 import AdditionalDishInfo from '../AdditionalDishInfo';
+import Badge from '../Badge';
 
 export default function SingleDish({
   singleDishDetails,
   singleDishIngredients,
   ...props
 }) {
-  const { container, dishHeader, dishDescription, img } = Styles;
+  const {
+    container,
+    dishHeader,
+    dishDescription,
+    img,
+    mainInfo,
+    badges,
+  } = Styles;
 
   return (
     <View style={container}>
@@ -29,13 +37,19 @@ export default function SingleDish({
           style={img}
         />
       )}
-      <View style={{ margin: 10 }}>
+      <View style={mainInfo}>
         <HeaderTitle>{singleDishDetails.name}</HeaderTitle>
         <AdditionalDishInfo
           preparationTime={singleDishDetails.preparationTime}
           portions={singleDishDetails.portions}
           difficulty={singleDishDetails.difficulty}
         />
+        <View style={badges}>
+          {singleDishDetails.isVegan && <Badge>Vegan</Badge>}
+          {singleDishDetails.isVegetarian && <Badge>Vegetarian</Badge>}
+          {singleDishDetails.isGlutenFree && <Badge>Glutenfree</Badge>}
+          {singleDishDetails.isLactoseFree && <Badge>Lactosefree</Badge>}
+        </View>
         <Text style={dishHeader}>{singleDishDetails.description}</Text>
         <View style={dishDescription}>
           {singleDishDetails.instructions.map((instruction) => (
@@ -71,6 +85,10 @@ SingleDish.propTypes = {
     description: PropTypes.string.isRequired,
     instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
     image: PropTypes.string,
+    isVegan: PropTypes.bool.isRequired,
+    isVegetarian: PropTypes.bool.isRequired,
+    isGlutenFree: PropTypes.bool.isRequired,
+    isLactoseFree: PropTypes.bool.isRequired,
   }).isRequired,
   singleDishIngredients: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

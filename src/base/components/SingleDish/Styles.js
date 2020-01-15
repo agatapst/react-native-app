@@ -26,4 +26,13 @@ export default StyleSheet.create({
     width: 500,
     height: 200,
   },
+  mainInfo: {
+    margin: 10,
+  },
+  badges: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 8,
+    marginBottom: 10,
+  },
 });
