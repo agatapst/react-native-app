@@ -11,7 +11,8 @@ export default function DishesList({ dishes, onPress, ...props }) {
     <FlatList
       style={list}
       data={dishes}
-      renderItem={({ item }) => (
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item, index }) => (
         <DishItem
           name={item.name}
           description={item.description}
@@ -22,6 +23,7 @@ export default function DishesList({ dishes, onPress, ...props }) {
           isGlutenFree={item.isGlutenFree}
           isLactoseFree={item.isLactoseFree}
           image={item.image}
+          key={index}
           onPress={() => onPress(item.id)}
         />
       )}

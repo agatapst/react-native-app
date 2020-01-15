@@ -10,7 +10,6 @@ const {
 export default StyleSheet.create({
   container: {
     backgroundColor: white,
-    marginBottom: 16,
   },
   dishHeader: {
     fontSize: headerBig,
@@ -22,5 +21,9 @@ export default StyleSheet.create({
     fontFamily: 'dm-sans',
     fontSize: big,
     marginBottom: 8,
+  },
+  img: {
+    width: 500,
+    height: 200,
   },
 });

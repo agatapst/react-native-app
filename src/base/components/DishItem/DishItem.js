@@ -88,6 +88,10 @@ DishItem.propTypes = {
   isVegetarian: PropTypes.bool.isRequired,
   isGlutenFree: PropTypes.bool.isRequired,
   isLactoseFree: PropTypes.bool.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   onPress: PropTypes.func.isRequired,
+};
+
+DishItem.defaultProps = {
+  image: null,
 };
