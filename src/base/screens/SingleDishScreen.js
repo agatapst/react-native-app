@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { Spinner } from 'native-base';
-import ActionButton from '../components/ActionButton';
-import IngredientsList from '../components/SingleDish';
+import SingleDish from '../components/SingleDish';
 import { getSingleDish as getSingleDishAction } from '../../modules/dishes/redux/actions';
 
 export const SingleDishScreen = ({
   getSingleDish: { data, isFetching },
   dispatch,
-  id,
   ...props
 }) => {
   const {
-    navigation: { navigate, getParam: getNavigationParam },
+    navigation: { getParam: getNavigationParam },
   } = props;
 
   useEffect(() => {
@@ -22,20 +20,17 @@ export const SingleDishScreen = ({
   }, []);
 
   return (
-    <SafeAreaView>
-      <View>
-        <ActionButton
-          isLink
-          text="Log out"
-          onPress={() => navigate('SignIn')}
-        />
-        <Text>I AM DISH SCREEN</Text>
+    <ScrollView>
+      <SafeAreaView>
         {isFetching && <Spinner />}
         {!isFetching && data && (
-          <IngredientsList dishIngredients={data.ingredients} />
+          <SingleDish
+            singleDishDetails={data.dish}
+            singleDishIngredients={data.ingredients}
+          />
         )}
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -43,6 +38,7 @@ SingleDishScreen.propTypes = {
   getSingleDish: PropTypes.shape({
     data: PropTypes.shape({
       ingredients: PropTypes.array,
+      dish: PropTypes.object,
     }),
     error: PropTypes.object,
     isFetching: PropTypes.bool,
@@ -52,7 +48,6 @@ SingleDishScreen.propTypes = {
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
   }).isRequired,
-  id: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ dishes }) => dishes;

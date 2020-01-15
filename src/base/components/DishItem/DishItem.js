@@ -33,12 +33,20 @@ export default function DishItem(props) {
 
   return (
     <View style={container}>
-      <Image
-        source={{
-          uri: `http://localhost:3000/dish-image/${image}`,
-        }}
-        style={img}
-      />
+      {image && (
+        <Image
+          source={{
+            uri: `http://localhost:3000/dish-image/${image}`,
+          }}
+          style={img}
+        />
+      )}
+      {!image && (
+        <Image
+          source={require('../../../assets/images/dish.jpeg')}
+          style={img}
+        />
+      )}
       <View style={listBox}>
         <TouchableOpacity onPress={onPress}>
           <Text style={listElementHeader}>{name}</Text>
