@@ -9,6 +9,7 @@ import HeaderTitle from '../../../../base/components/HeaderTitle';
 import Input from '../../../../base/components/Input';
 import ActionButton from '../../../../base/components/ActionButton';
 import AuthContainer from '../../../../base/components/AuthContainer';
+import PasswordInput from '../../../../base/components/PasswordInput';
 import AppText from '../../../../base/components/AppText';
 import Styles from './Styles';
 
@@ -20,6 +21,7 @@ class SignUpView extends Component {
       email: '',
       username: '',
       password: '',
+      passwordError: '',
     };
   }
 
@@ -42,17 +44,36 @@ class SignUpView extends Component {
     return email === '' || username === '' || password === '';
   };
 
+  validatePassword = () => {
+    const { password } = this.state;
+    let passwordError;
+    if (password.length === 0) {
+      passwordError = 'This field cannot be empty';
+    } else if (password.length < 8) {
+      passwordError = 'Password must have at least 8 characters';
+    }
+    this.setState({ passwordError });
+  };
+
+  clearValidation = () => {
+    this.setState({ passwordError: '' });
+  };
+
   submitForm = () => {
     const { dispatch, navigation } = this.props;
-    const { email, username, password } = this.state;
+    const { email, username, password, passwordError } = this.state;
 
-    const payload = {
-      email,
-      username,
-      password,
-    };
+    this.validatePassword();
 
-    dispatch(authActions.signUp(payload, navigation));
+    if (email && username && password && !passwordError) {
+      const payload = {
+        email,
+        username,
+        password,
+      };
+
+      dispatch(authActions.signUp(payload, navigation));
+    }
   };
 
   render() {
@@ -60,7 +81,7 @@ class SignUpView extends Component {
       navigation: { navigate },
       signUp,
     } = this.props;
-    const { email, username, password } = this.state;
+    const { email, username, password, passwordError } = this.state;
     const { container, loginBox, keyboardAvoidingView } = Styles;
 
     return (
@@ -80,11 +101,15 @@ class SignUpView extends Component {
               onChangeText={(value) => this.setState({ email: value })}
               autoCapitalize="none"
             />
-            <Input
+            <PasswordInput
+              isPassword
+              isError={!!passwordError}
+              errorMessage={passwordError}
               placeholder="password"
               value={password}
               onChangeText={(value) => this.setState({ password: value })}
-              secureTextEntry
+              onEndEditing={() => this.validatePassword()}
+              onFocus={() => this.clearValidation()}
             />
             <ActionButton text="SUBMIT" onPress={() => this.submitForm()} />
             {signUp.isFetching && <Spinner />}
