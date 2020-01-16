@@ -7,9 +7,11 @@ import DishDifficultyLabel from '../DishDifficultyLabel';
 
 const { row, iconsRow, additionalInfo, icon } = Styles;
 
-export default function AdditionalDishInfo({ ...props }) {
-  const { preparationTime, portions, difficulty } = props;
-
+export default function AdditionalDishInfo({
+  preparationTime,
+  portions,
+  difficulty,
+}) {
   return (
     <View style={[row, iconsRow]}>
       <View style={row}>

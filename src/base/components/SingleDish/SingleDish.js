@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, FlatList, Image } from 'react-native';
@@ -52,8 +52,8 @@ export default function SingleDish({
         </View>
         <Text style={dishHeader}>{singleDishDetails.description}</Text>
         <View style={dishDescription}>
-          {singleDishDetails.instructions.map((instruction) => (
-            <Text key={instruction}>{instruction}</Text>
+          {singleDishDetails.instructions.map((instruction, id) => (
+            <Text key={id}>{instruction}</Text>
           ))}
         </View>
 
@@ -61,11 +61,12 @@ export default function SingleDish({
         <FlatList
           data={singleDishIngredients}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={dishDescription} key={index}>
+          renderItem={({ item }) => (
+            <View style={dishDescription} key={item.id}>
               <Text>{item.name}</Text>
               <Text>
-                {item.quantity} {item.quantityType}
+                {item.quantity}
+                {item.quantityType}
               </Text>
             </View>
           )}
@@ -90,5 +91,5 @@ SingleDish.propTypes = {
     isGlutenFree: PropTypes.bool.isRequired,
     isLactoseFree: PropTypes.bool.isRequired,
   }).isRequired,
-  singleDishIngredients: PropTypes.arrayOf(PropTypes.object).isRequired,
+  singleDishIngredients: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };

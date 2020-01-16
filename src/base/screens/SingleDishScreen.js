@@ -8,13 +8,9 @@ import { getSingleDish as getSingleDishAction } from '../../modules/dishes/redux
 
 export const SingleDishScreen = ({
   getSingleDish: { data, isFetching },
+  navigation: { getParam: getNavigationParam },
   dispatch,
-  ...props
 }) => {
-  const {
-    navigation: { getParam: getNavigationParam },
-  } = props;
-
   useEffect(() => {
     dispatch(getSingleDishAction(getNavigationParam('id', 'NO-ID')));
   }, []);

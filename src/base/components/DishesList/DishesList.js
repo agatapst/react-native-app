@@ -12,7 +12,7 @@ export default function DishesList({ dishes, onPress, ...props }) {
       style={list}
       data={dishes}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item, index }) => (
+      renderItem={({ item }) => (
         <DishItem
           name={item.name}
           description={item.description}
@@ -23,7 +23,7 @@ export default function DishesList({ dishes, onPress, ...props }) {
           isGlutenFree={item.isGlutenFree}
           isLactoseFree={item.isLactoseFree}
           image={item.image}
-          key={index}
+          key={item.id}
           onPress={() => onPress(item.id)}
         />
       )}
