@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, Image } from 'react-native';
 import Styles from './Styles';
@@ -9,41 +8,34 @@ const { row, additionalInfo, icon } = Styles;
 export default function DishDifficultyLabel({ ...props }) {
   const { difficulty } = props;
 
+  const [levelImage, setLevelImage] = useState(null);
+  const [levelText, setLevelText] = useState('');
+
+  const levelEasyImg = require('../../../assets/images/levelEasy.png');
+  const levelMediumImg = require('../../../assets/images/levelMedium.png');
+  const levelChefImg = require('../../../assets/images/levelChef.png');
+
+  useEffect(() => {
+    if (difficulty === 1) {
+      setLevelImage(levelEasyImg);
+      setLevelText('EASY');
+    } else if (difficulty === 2) {
+      setLevelImage(levelMediumImg);
+      setLevelText('MEDIUM');
+    } else {
+      setLevelImage(levelChefImg);
+      setLevelText('CHEF');
+    }
+  }, [difficulty]);
+
   return (
     <View style={row}>
-      {difficulty === 1 && (
-        <View style={row}>
-          <Image
-            source={require('../../../assets/images/levelEasy.png')}
-            style={icon}
-          />
-          <Text style={additionalInfo}>easy LEVEL</Text>
-        </View>
-      )}
-      {difficulty === 2 && (
-        <View style={row}>
-          <Image
-            source={require('../../../assets/images/levelMedium.png')}
-            style={icon}
-          />
-          <Text style={additionalInfo}>medium LEVEL</Text>
-        </View>
-      )}
-      {difficulty === 3 && (
-        <View style={row}>
-          <Image
-            source={require('../../../assets/images/levelChef.png')}
-            style={icon}
-          />
-          <Text style={additionalInfo}>CHEF LEVEL</Text>
-        </View>
-      )}
+      <Image source={levelImage} style={icon} />
+      <Text style={additionalInfo}>{levelText}</Text>
     </View>
   );
 }
 
 DishDifficultyLabel.propTypes = {
-  preparationTime: PropTypes.number.isRequired,
-  portions: PropTypes.number.isRequired,
   difficulty: PropTypes.number.isRequired,
 };
