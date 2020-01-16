@@ -1,7 +1,7 @@
-const userPrefix = '/user/';
+const authPrefix = '/auth';
 
 export const API = {
-  SIGN_UP: `${userPrefix}sign-up`,
-  SIGN_IN: `${userPrefix}sign-in`,
+  SIGN_UP: `${authPrefix}/signup`,
+  SIGN_IN: `${authPrefix}/signin`,
   GET_DISHES: '/dish',
 };

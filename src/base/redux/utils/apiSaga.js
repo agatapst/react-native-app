@@ -11,13 +11,14 @@ export const apiSaga = (type, onSagaSuccess) => {
         action.endpoint,
         action.payload,
       );
+      const responseData = response.data || response;
       yield put({
         type: type + SUCCESS,
-        data: response.data || response,
+        data: responseData,
         loadMore: action.loadMore,
       });
       if (onSagaSuccess) {
-        yield* onSagaSuccess(response.data);
+        yield* onSagaSuccess(responseData);
       }
       if (action.afterSagaSuccess) {
         yield call(action.afterSagaSuccess);
