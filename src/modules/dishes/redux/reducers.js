@@ -10,7 +10,10 @@ export default combineReducers({
       ...state,
       data: {
         ...action.data,
-        data: [...stateData, ...action.data.data],
+        data: [
+          ...stateData,
+          ...action.data.data.map((item) => ({ ...item, id: `${item.id}_${(new Date()).toISOString()}` })),
+        ],
       },
     };
   }),

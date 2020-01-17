@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Styles from './Styles';
@@ -7,21 +7,26 @@ import dishTypeFilters from '../../constants/DishTypeFilters';
 
 const { container } = Styles;
 
-const DishesFilterBar = ({ isDisabled, onChange: changeFilters }) => {
-  const [filters, setFilters] = useState({});
+const DishesFilterBar = ({ onChange: changeFilters }) => {
+  const [, setFilters] = useState({});
 
-  const onChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    changeFilters(newFilters);
-  };
+  const onChange = useCallback((key, value) => {
+    setFilters((prevFilters) => {
+      const newFilters = {
+        ...prevFilters,
+        [key]: value,
+      };
+      changeFilters(newFilters);
+
+      return newFilters;
+    });
+  }, [setFilters]);
 
   return (
     <View style={container}>
       {Object.keys(dishTypeFilters).map((filterValue) => (
         <CheckboxBadge
           key={filterValue}
-          isDisabled={isDisabled}
           onChange={(isChecked) => { onChange(filterValue, isChecked); }}
         >
           {dishTypeFilters[filterValue]}
@@ -32,12 +37,10 @@ const DishesFilterBar = ({ isDisabled, onChange: changeFilters }) => {
 };
 
 DishesFilterBar.propTypes = {
-  isDisabled: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
 DishesFilterBar.defaultProps = {
-  isDisabled: false,
   onChange: undefined,
 };
 

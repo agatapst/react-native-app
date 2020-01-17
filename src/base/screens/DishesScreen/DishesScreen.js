@@ -12,7 +12,7 @@ import SearchBar from '../../components/SearchBar';
 import DishesFilterBar from '../../components/DishesFilterBar';
 import Styles from './Styles';
 
-const DISHES_PER_PAGE = 2;
+const DISHES_PER_PAGE = 3;
 const QUERY_MIN_LENGTH = 3;
 const WAIT_BEFORE_REQUEST_CALL = 1000;
 
@@ -76,7 +76,7 @@ const DishesScreen = ({
     }
   }, [setPage, data]);
 
-  const keyExtractor = useCallback((item) => item.id, []);
+  const keyExtractor = useCallback((item) => `${item.id}`, []);
 
   return (
     <ScreenContainer>
@@ -86,21 +86,19 @@ const DishesScreen = ({
           onChangeText={onSearchChange}
           placeholder="Search for a recipe"
         />
-        <DishesFilterBar isDisabled={isFetching} onChange={onFiltersChange} />
+        <DishesFilterBar onChange={onFiltersChange} />
         <View style={dishesContainer}>
-          <HeaderTitle>Choose a recipe:</HeaderTitle>
-          {data && (
-            <DishesList
-              dishes={data.data}
-              scrollToOverflowEnabled
-              keyExtractor={keyExtractor}
-              onEndReached={onEndReached}
-              onEndReachedThreshold={0.01}
-              initialNumToRender={0}
-              maxToRenderPerBatch={1}
-              onPress={() => navigate('Home')}
-            />
-          )}
+          <DishesList
+            dishes={data ? data.data : []}
+            scrollToOverflowEnabled
+            keyExtractor={keyExtractor}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.01}
+            initialNumToRender={0}
+            maxToRenderPerBatch={1}
+            ListHeaderComponent={() => (<HeaderTitle>Choose a recipe:</HeaderTitle>)}
+            onPress={() => navigate('Home')}
+          />
           {isFetching && <Spinner />}
         </View>
       </View>
