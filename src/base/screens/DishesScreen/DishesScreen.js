@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Spinner } from 'native-base';
 import { View } from 'react-native';
 import DishesList from '../../components/DishesList';
-import HeaderTitle from '../../components/HeaderTitle';
 import ScreenContainer from '../../components/ScreenContainer';
 import { getDishes as getDishesAction } from '../../../modules/dishes/redux/actions';
 import SearchBar from '../../components/SearchBar';
