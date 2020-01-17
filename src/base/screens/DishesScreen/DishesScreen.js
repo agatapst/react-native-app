@@ -35,7 +35,7 @@ const DishesScreen = ({
       if (!isFetching) {
         const queryParams = { page, perPage: DISHES_PER_PAGE, filters, loadMore: loadMore.current };
 
-        if (query && query >= QUERY_MIN_LENGTH) {
+        if (query && query.length >= QUERY_MIN_LENGTH) {
           queryParams.query = query;
         }
 
@@ -76,8 +76,6 @@ const DishesScreen = ({
     }
   }, [setPage, data]);
 
-  const keyExtractor = useCallback((item) => `${item.id}`, []);
-
   return (
     <ScreenContainer>
       <View style={container}>
@@ -90,13 +88,7 @@ const DishesScreen = ({
         <View style={dishesContainer}>
           <DishesList
             dishes={data ? data.data : []}
-            scrollToOverflowEnabled
-            keyExtractor={keyExtractor}
             onEndReached={onEndReached}
-            onEndReachedThreshold={0.01}
-            initialNumToRender={0}
-            maxToRenderPerBatch={1}
-            ListHeaderComponent={() => (<HeaderTitle>Choose a recipe:</HeaderTitle>)}
             onPress={() => navigate('Home')}
           />
           {isFetching && <Spinner />}
