@@ -16,7 +16,7 @@ const SearchBar = ({ onFilterButtonPress, ...props }) => (
       style={input}
       {...props}
     />
-    <IconButton icon="filter" mode="contained" onPress={onFilterButtonPress} />
+    <IconButton icon="filter" mode="contained" onPress={onFilterButtonPress} color="grey" />
   </View>
 );
 
