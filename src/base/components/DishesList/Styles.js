@@ -8,6 +8,7 @@ const {
 export default StyleSheet.create({
   list: {
     overflow: 'scroll',
+    flex: 1,
   },
   listBox: {
     display: 'flex',

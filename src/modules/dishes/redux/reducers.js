@@ -4,18 +4,14 @@ import { apiReducer } from '../../../base/redux/utils';
 
 export default combineReducers({
   getDishes: apiReducer(GET_DISHES, (state, action) => {
-    if (action.loadMore && state.data && Array.isArray(state.data.data)) {
-      return {
-        ...state,
-        data: {
-          ...action.data,
-          data: [...state.data.data, ...action.data.data],
-        },
-      };
-    }
+    const stateData = state.data && action.loadMore ? state.data.data : [];
+
     return {
       ...state,
-      data: action.data,
+      data: {
+        ...action.data,
+        data: [...stateData, ...action.data.data],
+      },
     };
   }),
   getDish: apiReducer(GET_DISH),
