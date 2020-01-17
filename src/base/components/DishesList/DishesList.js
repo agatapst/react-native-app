@@ -1,14 +1,30 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Text } from 'react-native';
+import { Animated, FlatList, Text } from 'react-native';
 import Styles from './Styles';
+import * as HeaderTitleStyles from '../HeaderTitle/Styles';
 import DishItem from '../DishItem/DishItem';
-import HeaderTitle from '../HeaderTitle/HeaderTitle';
+
+const maxHeaderFontSize = 38;
+const minHeaderFontSize = 20;
 
 export default function DishesList({ dishes, onPress, onEndReached }) {
   const { list } = Styles;
+  const { default: { headerTitle } } = HeaderTitleStyles;
+
+  const [scrollOffset] = useState(new Animated.Value(0));
 
   const keyExtractor = useCallback((item) => `${item.id}`, []);
+
+  const onScroll = useCallback(({
+    nativeEvent: {
+      contentOffset: { y },
+    },
+  }) => {
+    const scrollSensitivity = 0.5;
+    const offset = y / scrollSensitivity;
+    scrollOffset.setValue(offset);
+  }, [scrollOffset]);
 
   return (
     <FlatList
@@ -19,8 +35,22 @@ export default function DishesList({ dishes, onPress, onEndReached }) {
       onEndReachedThreshold={0.01}
       initialNumToRender={0}
       maxToRenderPerBatch={1}
-      ListHeaderComponent={() => (<HeaderTitle>Choose a recipe:</HeaderTitle>)}
+      ListHeaderComponent={() => (
+        <Animated.Text
+          style={{
+            ...headerTitle,
+            fontSize: scrollOffset.interpolate({
+              inputRange: [0, 200],
+              outputRange: [maxHeaderFontSize, minHeaderFontSize],
+              extrapolate: 'clamp',
+            }),
+          }}
+        >
+          Choose a recipe:
+        </Animated.Text>
+      )}
       ListEmptyComponent={() => (<Text>No dishes matching criteria</Text>)}
+      onScroll={onScroll}
       onEndReached={onEndReached}
       renderItem={({ item }) => (
         <DishItem

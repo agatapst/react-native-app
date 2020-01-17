@@ -8,6 +8,7 @@ export default StyleSheet.create({
   dishesContainer: {
     backgroundColor: Colors.lightCream,
     padding: 16,
+    paddingTop: 0,
     flex: 1,
   },
 });
