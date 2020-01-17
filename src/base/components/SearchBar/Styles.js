@@ -12,7 +12,7 @@ export default StyleSheet.create({
     fontFamily: 'dm-sans',
     fontSize: big,
     padding: 5,
-    width: '90%',
+    width: '80%',
     height: '100%',
     display: 'flex',
     alignItems: 'center',

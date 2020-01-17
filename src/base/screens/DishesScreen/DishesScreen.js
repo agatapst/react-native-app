@@ -25,6 +25,7 @@ const DishesScreen = ({
   const [page, setPage] = useState(0);
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState({});
+  const [showFiltersBar, setShowFiltersBar] = useState(false);
   const callTimeoutRef = useRef(-1);
   const forceFetch = useRef(true);
   const loadMore = useRef(true);
@@ -75,6 +76,10 @@ const DishesScreen = ({
     }
   }, [setPage, data]);
 
+  const onFilterButtonPress = useCallback(() => {
+    setShowFiltersBar((prev) => !prev);
+  }, [setShowFiltersBar]);
+
   return (
     <ScreenContainer>
       <View style={container}>
@@ -82,8 +87,9 @@ const DishesScreen = ({
           value={query}
           onChangeText={onSearchChange}
           placeholder="Search for a recipe"
+          onFilterButtonPress={onFilterButtonPress}
         />
-        <DishesFilterBar onChange={onFiltersChange} />
+        {showFiltersBar && (<DishesFilterBar onChange={onFiltersChange} />)}
         <View style={dishesContainer}>
           <DishesList
             dishes={data ? data.data : []}
