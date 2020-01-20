@@ -12,10 +12,6 @@ export default function DishItem(props) {
     description,
     preparationTime,
     portions,
-    isVegan,
-    isVegetarian,
-    isGlutenFree,
-    isLactoseFree,
     image,
     onPress,
   } = props;
@@ -62,10 +58,11 @@ export default function DishItem(props) {
           </View>
         </View>
         <View style={badges}>
-          {isVegan && <Badge>{dishTypeFilters.isVegan}</Badge>}
-          {isVegetarian && <Badge>{dishTypeFilters.isVegetarian}</Badge>}
-          {isGlutenFree && <Badge>{dishTypeFilters.isGlutenFree}</Badge>}
-          {isLactoseFree && <Badge>{dishTypeFilters.isLactoseFree}</Badge>}
+          {Object.keys(dishTypeFilters).map((dishTypeFilterKey) => props[dishTypeFilterKey] && (
+            <Badge>
+              {dishTypeFilters[dishTypeFilterKey]}
+            </Badge>
+          ))}
         </View>
       </View>
     </View>
