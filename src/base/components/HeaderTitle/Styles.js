@@ -12,7 +12,8 @@ export default StyleSheet.create({
     fontSize: extraBig,
     color: black,
     marginBottom: 30,
-    marginTop: 10,
+    marginTop: 20,
+    paddingTop: 16,
     fontFamily: 'frank-ruhl-bold',
   },
 });

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
 import Styles from './Styles';
+import dishTypeFilters from '../../constants/DishTypeFilters';
 
 export default function DishItem(props) {
   const {
@@ -61,10 +62,10 @@ export default function DishItem(props) {
           </View>
         </View>
         <View style={badges}>
-          {isVegan && <Badge>Vegan</Badge>}
-          {isVegetarian && <Badge>Vegetarian</Badge>}
-          {isGlutenFree && <Badge>Glutenfree</Badge>}
-          {isLactoseFree && <Badge>Lactosefree</Badge>}
+          {isVegan && <Badge>{dishTypeFilters.isVegan}</Badge>}
+          {isVegetarian && <Badge>{dishTypeFilters.isVegetarian}</Badge>}
+          {isGlutenFree && <Badge>{dishTypeFilters.isGlutenFree}</Badge>}
+          {isLactoseFree && <Badge>{dishTypeFilters.isLactoseFree}</Badge>}
         </View>
       </View>
     </View>
