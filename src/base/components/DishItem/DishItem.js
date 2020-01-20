@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
 import Styles from './Styles';
 import dishTypeFilters from '../../constants/DishTypeFilters';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesScreen';
 
 export default function DishItem(props) {
   const {
@@ -27,6 +28,7 @@ export default function DishItem(props) {
     iconsRow,
     additionalInfo,
   } = Styles;
+  const { changeFilters } = useContext(DishesFiltersContext);
 
   return (
     <View style={container}>
@@ -59,7 +61,7 @@ export default function DishItem(props) {
         </View>
         <View style={badges}>
           {Object.keys(dishTypeFilters).map((dishTypeFilterKey) => props[dishTypeFilterKey] && (
-            <Badge>
+            <Badge onPress={() => { changeFilters({ [dishTypeFilterKey]: true }, false); }}>
               {dishTypeFilters[dishTypeFilterKey]}
             </Badge>
           ))}

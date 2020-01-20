@@ -1,47 +1,33 @@
-import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import Styles from './Styles';
 import CheckboxBadge from '../CheckboxBadge';
 import dishTypeFilters from '../../constants/DishTypeFilters';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesScreen';
 
 const { container } = Styles;
 
-const DishesFilterBar = ({ onChange: changeFilters }) => {
-  const [, setFilters] = useState({});
-
-  const onChange = useCallback((key, value) => {
-    setFilters((prevFilters) => {
-      const newFilters = {
-        ...prevFilters,
-        [key]: value,
-      };
-      changeFilters(newFilters);
-
-      return newFilters;
-    });
-  }, [setFilters]);
+const DishesFilterBar = () => {
+  const { filters, changeFilters } = useContext(DishesFiltersContext);
 
   return (
     <View style={container}>
       {Object.keys(dishTypeFilters).map((filterValue) => (
         <CheckboxBadge
           key={filterValue}
-          onChange={(isChecked) => { onChange(filterValue, isChecked); }}
+          isChecked={filters[filterValue]}
+          onChange={(isChecked) => {
+            changeFilters((prevFilters) => ({
+              ...prevFilters,
+              [filterValue]: isChecked,
+            }));
+          }}
         >
           {dishTypeFilters[filterValue]}
         </CheckboxBadge>
       ))}
     </View>
   );
-};
-
-DishesFilterBar.propTypes = {
-  onChange: PropTypes.func,
-};
-
-DishesFilterBar.defaultProps = {
-  onChange: undefined,
 };
 
 export default DishesFilterBar;
