@@ -5,9 +5,7 @@ import Styles from './Styles';
 
 const { row, additionalInfo, icon } = Styles;
 
-export default function DishDifficultyLabel({ ...props }) {
-  const { difficulty } = props;
-
+export default function DishDifficultyLabel({ difficulty }) {
   const [levelImage, setLevelImage] = useState(null);
   const [levelText, setLevelText] = useState('');
 

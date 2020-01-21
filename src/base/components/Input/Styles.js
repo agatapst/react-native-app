@@ -5,13 +5,14 @@ import Typography from '../../constants/Typography';
 const { gray } = Colors;
 const {
   fontSize: { big },
+  fontFamily: { secondary },
 } = Typography;
 
 export default StyleSheet.create({
   input: {
     height: 50,
     fontSize: big,
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     borderBottomColor: gray,
     borderBottomWidth: 1,
     padding: 5,

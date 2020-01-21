@@ -4,6 +4,7 @@ import Colors from '../../constants/Colors';
 
 const {
   fontSize: { regular },
+  fontFamily: { secondary },
 } = Typography;
 
 const { white, gray } = Colors;
@@ -27,7 +28,7 @@ export default StyleSheet.create({
     marginRight: 10,
   },
   additionalInfo: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: regular,
     color: gray,
   },

@@ -5,6 +5,7 @@ import Typography from '../../constants/Typography';
 const { white } = Colors;
 const {
   fontSize: { big, headerBig },
+  fontFamily: { main, secondary },
 } = Typography;
 
 export default StyleSheet.create({
@@ -15,10 +16,10 @@ export default StyleSheet.create({
     fontSize: headerBig,
     marginTop: 12,
     marginBottom: 4,
-    fontFamily: 'frank-ruhl-bold',
+    fontFamily: main,
   },
   dishDescription: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: big,
     marginBottom: 8,
   },

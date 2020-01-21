@@ -4,6 +4,7 @@ import Colors from '../../constants/Colors';
 
 const {
   fontSize: { big, headerBig, regular },
+  fontFamily: { main, secondary },
 } = Typography;
 
 const { white } = Colors;
@@ -22,10 +23,10 @@ export default StyleSheet.create({
     fontSize: headerBig,
     marginTop: 12,
     marginBottom: 4,
-    fontFamily: 'frank-ruhl-bold',
+    fontFamily: main,
   },
   listElementDescription: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: big,
     marginBottom: 8,
   },
@@ -49,7 +50,7 @@ export default StyleSheet.create({
     marginRight: 10,
   },
   additionalInfo: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: regular,
   },
 });

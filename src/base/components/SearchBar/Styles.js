@@ -4,12 +4,13 @@ import Colors from '../../constants/Colors';
 
 const {
   fontSize: { big },
+  fontFamily: { secondary },
 } = Typography;
 const { gray } = Colors;
 
 export default StyleSheet.create({
   input: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: big,
     padding: 5,
     width: '90%',

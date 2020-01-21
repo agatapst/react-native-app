@@ -1,1 +1,1 @@
-export { default } from './DishDiffulctyLabel';
+export { default } from './DishDifficultyLabel';

@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image } from 'react-native';
+import { View } from 'react-native';
 import Styles from './Styles';
 import DishDifficultyLabel from '../DishDifficultyLabel';
+import PortionsLabel from '../PortionsLabel';
+import PreparationTimeLabel from '../PreparationTimeLabel';
 
-const { row, iconsRow, additionalInfo, icon } = Styles;
+const { row, iconsRow } = Styles;
 
 export default function AdditionalDishInfo({
   preparationTime,
@@ -14,20 +16,8 @@ export default function AdditionalDishInfo({
 }) {
   return (
     <View style={[row, iconsRow]}>
-      <View style={row}>
-        <Image
-          source={require('../../../assets/images/time.png')}
-          style={icon}
-        />
-        <Text style={additionalInfo}>{preparationTime} MIN.</Text>
-      </View>
-      <View style={row}>
-        <Image
-          source={require('../../../assets/images/portions.png')}
-          style={icon}
-        />
-        <Text style={additionalInfo}>{portions} PORTIONS</Text>
-      </View>
+      <PreparationTimeLabel preparationTime={preparationTime} />
+      <PortionsLabel portions={portions} />
       <DishDifficultyLabel difficulty={difficulty} />
     </View>
   );

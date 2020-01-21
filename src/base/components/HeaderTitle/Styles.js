@@ -4,6 +4,7 @@ import Typography from '../../constants/Typography';
 
 const {
   fontSize: { extraBig },
+  fontFamily: { main },
 } = Typography;
 const { black } = Colors;
 
@@ -13,6 +14,6 @@ export default StyleSheet.create({
     color: black,
     marginBottom: 30,
     marginTop: 10,
-    fontFamily: 'frank-ruhl-bold',
+    fontFamily: main,
   },
 });

@@ -1,8 +1,12 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
+import LocalImage from '../LocalImage';
+import ApiImage from '../ApiImage';
+import PreparationTimeLabel from '../PreparationTimeLabel';
+import PortionsLabel from '../PortionsLabel';
 import Styles from './Styles';
 
 export default function DishItem(props) {
@@ -24,25 +28,17 @@ export default function DishItem(props) {
     listBox,
     container,
     badges,
-    icon,
     img,
     row,
     iconsRow,
-    additionalInfo,
   } = Styles;
 
   return (
     <View style={container}>
-      {image && (
-        <Image
-          source={{
-            uri: `http://localhost:3000/dish-image/${image}`,
-          }}
-          style={img}
-        />
-      )}
-      {!image && (
-        <Image
+      {image ? (
+        <ApiImage fileName={image} style={img} />
+      ) : (
+        <LocalImage
           source={require('../../../assets/images/dish.jpeg')}
           style={img}
         />
@@ -53,20 +49,8 @@ export default function DishItem(props) {
         </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
         <View style={[row, iconsRow]}>
-          <View style={row}>
-            <Image
-              source={require('../../../assets/images/time.png')}
-              style={icon}
-            />
-            <Text style={additionalInfo}>Time: {preparationTime} minutes</Text>
-          </View>
-          <View style={row}>
-            <Image
-              source={require('../../../assets/images/portions.png')}
-              style={icon}
-            />
-            <Text style={additionalInfo}>Portions: {portions}</Text>
-          </View>
+          <PreparationTimeLabel preparationTime={preparationTime} />
+          <PortionsLabel portions={portions} />
         </View>
         <View style={badges}>
           {isVegan && <Badge>Vegan</Badge>}

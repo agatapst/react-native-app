@@ -3,6 +3,7 @@ import Typography from '../../constants/Typography';
 
 const {
   fontSize: { big, headerBig },
+  fontFamily: { main, secondary },
 } = Typography;
 
 export default StyleSheet.create({
@@ -16,10 +17,10 @@ export default StyleSheet.create({
   listElementHeader: {
     fontSize: headerBig,
     marginBottom: 4,
-    fontFamily: 'frank-ruhl-bold',
+    fontFamily: main,
   },
   listElementDescription: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: big,
   },
 });

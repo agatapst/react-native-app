@@ -1,11 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, FlatList, Image } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import Styles from './Styles';
 import HeaderTitle from '../HeaderTitle';
 import AdditionalDishInfo from '../AdditionalDishInfo';
 import Badge from '../Badge';
+import ApiImage from '../ApiImage';
+import LocalImage from '../LocalImage';
 
 export default function SingleDish({
   singleDishDetails,
@@ -23,16 +25,10 @@ export default function SingleDish({
 
   return (
     <View style={container}>
-      {singleDishDetails.image && (
-        <Image
-          source={{
-            uri: `http://localhost:3000/dish-image/${singleDishDetails.image}`,
-          }}
-          style={img}
-        />
-      )}
-      {!singleDishDetails.image && (
-        <Image
+      {singleDishDetails.image ? (
+        <ApiImage fileName={singleDishDetails.image} style={img} />
+      ) : (
+        <LocalImage
           source={require('../../../assets/images/dish.jpeg')}
           style={img}
         />
