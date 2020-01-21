@@ -8,6 +8,7 @@ import AdditionalDishInfo from '../AdditionalDishInfo';
 import Badge from '../Badge';
 import ApiImage from '../ApiImage';
 import LocalImage from '../LocalImage';
+import DishQuantityLabel from '../DishQuantityLabel.js';
 
 export default function SingleDish({
   singleDishDetails,
@@ -60,10 +61,10 @@ export default function SingleDish({
           renderItem={({ item }) => (
             <View style={dishDescription} key={item.id}>
               <Text>{item.name}</Text>
-              <Text>
-                {item.quantity}
-                {item.quantityType}
-              </Text>
+              <DishQuantityLabel
+                quantity={item.quantity}
+                quantityType={item.quantityType}
+              />
             </View>
           )}
           {...props}
