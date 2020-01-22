@@ -17,7 +17,7 @@ export default function DishQuantityLabel({ quantity, quantityType }) {
       plural: 'pieces',
     },
     milliliters: {
-      singular: 'mililitr',
+      singular: 'milliliter',
       plural: 'milliliters',
     },
     rice_pack: {
@@ -32,16 +32,20 @@ export default function DishQuantityLabel({ quantity, quantityType }) {
       singular: 'gram',
       plural: 'grams',
     },
+    kilograms: {
+      singular: 'kilogram',
+      plural: 'kilograms',
+    },
   };
 
   return (
     <View>
-      {{ quantity } && (
+      {quantity && (
         <Text>
-          {quantity}
-          {quantity > 1
-            ? ` ${quantityTypes[quantityType].plural}`
-            : ` ${quantityTypes[quantityType].singular}`}
+          {`${quantity} `}
+          {quantityTypes[quantityType] && quantity > 1
+            ? quantityTypes[quantityType].plural
+            : quantityTypes[quantityType].singular}
         </Text>
       )}
     </View>
