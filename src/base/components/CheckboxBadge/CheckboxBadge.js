@@ -1,12 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import Styles from './Styles';
 
 const { badge, badgeText, badgeActive } = Styles;
 
-const CheckboxBadge = ({ children, isDisabled, onChange, ...props }) => {
-  const [isActive, setIsActive] = useState(false);
+const CheckboxBadge = ({ children, isDisabled, isChecked, onChange, ...props }) => {
+  const [isActive, setIsActive] = useState(isChecked);
+
+  useEffect(() => {
+    setIsActive(isChecked);
+  }, [isChecked]);
 
   const onPress = useCallback(() => {
     if (!isDisabled) {
@@ -34,11 +38,13 @@ CheckboxBadge.propTypes = {
     PropTypes.node,
   ]).isRequired,
   isDisabled: PropTypes.bool,
+  isChecked: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
 CheckboxBadge.defaultProps = {
   isDisabled: false,
+  isChecked: false,
   onChange: undefined,
 };
 

@@ -15,6 +15,8 @@ const DISHES_PER_PAGE = 3;
 const QUERY_MIN_LENGTH = 3;
 const WAIT_BEFORE_REQUEST_CALL = 1000;
 
+export const DishesFiltersContext = React.createContext({});
+
 const DishesScreen = ({
   getDishes: { isFetching, data },
   navigation: { navigate },
@@ -63,8 +65,9 @@ const DishesScreen = ({
     setPage(0);
   }, [setPage, setQuery]);
 
-  const onFiltersChange = useCallback((newFilters) => {
+  const onFiltersChange = useCallback((newFilters, withFetchTimeout = true) => {
     loadMore.current = false;
+    forceFetch.current = !withFetchTimeout;
     setFilters(newFilters);
     setPage(0);
   }, [setPage, setFilters]);
@@ -81,25 +84,27 @@ const DishesScreen = ({
   }, [setShowFiltersBar]);
 
   return (
-    <ScreenContainer>
-      <View style={container}>
-        <SearchBar
-          value={query}
-          onChangeText={onSearchChange}
-          placeholder="Search for a recipe"
-          onFilterButtonPress={onFilterButtonPress}
-        />
-        {showFiltersBar && (<DishesFilterBar onChange={onFiltersChange} />)}
-        <View style={dishesContainer}>
-          <DishesList
-            dishes={data ? data.data : []}
-            onEndReached={onEndReached}
-            onPress={() => navigate('Home')}
+    <DishesFiltersContext.Provider value={{ filters, changeFilters: onFiltersChange }}>
+      <ScreenContainer>
+        <View style={container}>
+          <SearchBar
+            value={query}
+            onChangeText={onSearchChange}
+            placeholder="Search for a recipe"
+            onFilterButtonPress={onFilterButtonPress}
           />
-          {isFetching && <Spinner />}
+          {showFiltersBar && (<DishesFilterBar onChange={onFiltersChange} />)}
+          <View style={dishesContainer}>
+            <DishesList
+              dishes={data ? data.data : []}
+              onEndReached={onEndReached}
+              onPress={() => navigate('Home')}
+            />
+            {isFetching && <Spinner />}
+          </View>
         </View>
-      </View>
-    </ScreenContainer>
+      </ScreenContainer>
+    </DishesFiltersContext.Provider>
   );
 };
 

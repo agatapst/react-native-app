@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
 import Styles from './Styles';
 import dishTypeFilters from '../../constants/DishTypeFilters';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesScreen';
 
 export default function DishItem(props) {
   const {
@@ -12,10 +13,6 @@ export default function DishItem(props) {
     description,
     preparationTime,
     portions,
-    isVegan,
-    isVegetarian,
-    isGlutenFree,
-    isLactoseFree,
     image,
     onPress,
   } = props;
@@ -31,6 +28,7 @@ export default function DishItem(props) {
     iconsRow,
     additionalInfo,
   } = Styles;
+  const { changeFilters } = useContext(DishesFiltersContext);
 
   return (
     <View style={container}>
@@ -62,10 +60,11 @@ export default function DishItem(props) {
           </View>
         </View>
         <View style={badges}>
-          {isVegan && <Badge>{dishTypeFilters.isVegan}</Badge>}
-          {isVegetarian && <Badge>{dishTypeFilters.isVegetarian}</Badge>}
-          {isGlutenFree && <Badge>{dishTypeFilters.isGlutenFree}</Badge>}
-          {isLactoseFree && <Badge>{dishTypeFilters.isLactoseFree}</Badge>}
+          {Object.keys(dishTypeFilters).map((dishTypeFilterKey) => props[dishTypeFilterKey] && (
+            <Badge onPress={() => { changeFilters({ [dishTypeFilterKey]: true }, false); }}>
+              {dishTypeFilters[dishTypeFilterKey]}
+            </Badge>
+          ))}
         </View>
       </View>
     </View>
