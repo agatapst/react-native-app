@@ -1,14 +1,15 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, FlatList, Text } from 'react-native';
+import { Animated, FlatList } from 'react-native';
 import Styles from './Styles';
 import * as HeaderTitleStyles from '../HeaderTitle/Styles';
 import DishItem from '../DishItem/DishItem';
+import NoItemsMessage from '../NoItemsMessage/NoItemsMessage';
 
 const maxHeaderFontSize = 38;
 const minHeaderFontSize = 20;
 
-export default function DishesList({ dishes, onPress, onEndReached }) {
+const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
   const { list } = Styles;
   const { default: { headerTitle } } = HeaderTitleStyles;
 
@@ -35,7 +36,7 @@ export default function DishesList({ dishes, onPress, onEndReached }) {
       onEndReachedThreshold={0.01}
       initialNumToRender={0}
       maxToRenderPerBatch={1}
-      ListHeaderComponent={() => (
+      ListHeaderComponent={() => !!dishes.length && (
         <Animated.Text
           style={{
             ...headerTitle,
@@ -49,7 +50,7 @@ export default function DishesList({ dishes, onPress, onEndReached }) {
           Choose a recipe:
         </Animated.Text>
       )}
-      ListEmptyComponent={() => (<Text>No dishes matching criteria</Text>)}
+      ListEmptyComponent={() => !isLoading && (<NoItemsMessage text="No more recipes" />)}
       onScroll={onScroll}
       onEndReached={onEndReached}
       renderItem={({ item }) => (
@@ -68,10 +69,17 @@ export default function DishesList({ dishes, onPress, onEndReached }) {
       )}
     />
   );
-}
+};
 
 DishesList.propTypes = {
   dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
   onPress: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
+
+DishesList.defaultProps = {
+  isLoading: false,
+};
+
+export default DishesList;

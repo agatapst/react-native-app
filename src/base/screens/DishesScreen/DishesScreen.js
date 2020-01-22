@@ -97,6 +97,7 @@ const DishesScreen = ({
           <View style={dishesContainer}>
             <DishesList
               dishes={data ? data.data : []}
+              isLoading={isFetching}
               onEndReached={onEndReached}
               onPress={() => navigate('Home')}
             />
