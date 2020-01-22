@@ -18,6 +18,7 @@ export default function DishesList({ dishes, onPress, ...props }) {
           description={item.description}
           preparationTime={item.preparationTime}
           portions={item.portions}
+          difficulty={item.difficulty}
           isVegan={item.isVegan}
           isVegetarian={item.isVegetarian}
           isGlutenFree={item.isGlutenFree}

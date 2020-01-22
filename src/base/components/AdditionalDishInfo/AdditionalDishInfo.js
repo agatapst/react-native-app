@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Styles from './Styles';
 import DishDifficultyLabel from '../DishDifficultyLabel';
-import PortionsLabel from '../PortionsLabel';
-import PreparationTimeLabel from '../PreparationTimeLabel';
+import DetailsLabel from '../DetailsLabel';
 
 const { row, iconsRow } = Styles;
 
@@ -16,8 +15,8 @@ export default function AdditionalDishInfo({
 }) {
   return (
     <View style={[row, iconsRow]}>
-      <PreparationTimeLabel preparationTime={preparationTime} />
-      <PortionsLabel portions={portions} />
+      <DetailsLabel type="preparationTime" preparationTime={preparationTime} />
+      <DetailsLabel type="portions" portions={portions} />
       <DishDifficultyLabel difficulty={difficulty} />
     </View>
   );

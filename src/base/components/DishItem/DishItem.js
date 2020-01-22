@@ -5,9 +5,8 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
 import LocalImage from '../LocalImage';
 import ApiImage from '../ApiImage';
-import PreparationTimeLabel from '../PreparationTimeLabel';
-import PortionsLabel from '../PortionsLabel';
 import Styles from './Styles';
+import AdditionalDishInfo from '../AdditionalDishInfo/AdditionalDishInfo';
 
 export default function DishItem(props) {
   const {
@@ -15,6 +14,7 @@ export default function DishItem(props) {
     description,
     preparationTime,
     portions,
+    difficulty,
     isVegan,
     isVegetarian,
     isGlutenFree,
@@ -29,8 +29,6 @@ export default function DishItem(props) {
     container,
     badges,
     img,
-    row,
-    iconsRow,
   } = Styles;
 
   return (
@@ -48,10 +46,11 @@ export default function DishItem(props) {
           <Text style={listElementHeader}>{name}</Text>
         </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
-        <View style={[row, iconsRow]}>
-          <PreparationTimeLabel preparationTime={preparationTime} />
-          <PortionsLabel portions={portions} />
-        </View>
+        <AdditionalDishInfo
+          preparationTime={preparationTime}
+          portions={portions}
+          difficulty={difficulty}
+        />
         <View style={badges}>
           {isVegan && <Badge>Vegan</Badge>}
           {isVegetarian && <Badge>Vegetarian</Badge>}
@@ -68,6 +67,7 @@ DishItem.propTypes = {
   description: PropTypes.string.isRequired,
   preparationTime: PropTypes.number.isRequired,
   portions: PropTypes.number.isRequired,
+  difficulty: PropTypes.number.isRequired,
   isVegan: PropTypes.bool.isRequired,
   isVegetarian: PropTypes.bool.isRequired,
   isGlutenFree: PropTypes.bool.isRequired,

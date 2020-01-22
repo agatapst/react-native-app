@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function DishQuantityLabel({ quantity, quantityType }) {
   const quantityTypes = {
@@ -35,12 +35,16 @@ export default function DishQuantityLabel({ quantity, quantityType }) {
   };
 
   return (
-    <Text>
-      {quantity}
-      {quantity > 1 && quantityType
-        ? ` ${quantityTypes[quantityType].plural}`
-        : ` ${quantityTypes[quantityType].singular}`}
-    </Text>
+    <View>
+      {{ quantity } && (
+        <Text>
+          {quantity}
+          {quantity > 1
+            ? ` ${quantityTypes[quantityType].plural}`
+            : ` ${quantityTypes[quantityType].singular}`}
+        </Text>
+      )}
+    </View>
   );
 }
 DishQuantityLabel.propTypes = {
