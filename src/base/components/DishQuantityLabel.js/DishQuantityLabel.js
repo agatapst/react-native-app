@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
@@ -43,9 +44,10 @@ export default function DishQuantityLabel({ quantity, quantityType }) {
       {quantity && (
         <Text>
           {`${quantity} `}
-          {quantityTypes[quantityType] && quantity > 1
-            ? quantityTypes[quantityType].plural
-            : quantityTypes[quantityType].singular}
+          {quantityTypes[quantityType] &&
+            (quantity > 1
+              ? quantityTypes[quantityType].plural
+              : quantityTypes[quantityType].singular)}
         </Text>
       )}
     </View>
