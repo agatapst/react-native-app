@@ -9,7 +9,7 @@ import ApiImage from '../ApiImage';
 import Styles from './Styles';
 import AdditionalDishInfo from '../AdditionalDishInfo/AdditionalDishInfo';
 import dishTypeFilters from '../../constants/DishTypeFilters';
-import { DishesFiltersContext } from '../../../common/utils/DishesFiltersContext';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesFiltersContext';
 
 export default function DishItem(props) {
   const {

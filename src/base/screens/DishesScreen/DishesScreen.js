@@ -9,7 +9,7 @@ import DishesList from '../../components/DishesList';
 import ScreenContainer from '../../components/ScreenContainer';
 import { getDishes as getDishesAction } from '../../../modules/dishes/redux/actions';
 import SearchBar from '../../components/SearchBar';
-import { DishesFiltersContext } from '../../../common/utils/DishesFiltersContext';
+import { DishesFiltersContext } from './DishesFiltersContext';
 import DishesFilterBar from '../../components/DishesFilterBar';
 import Styles from './Styles';
 
