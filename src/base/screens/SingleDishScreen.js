@@ -12,7 +12,8 @@ export const SingleDishScreen = ({
   dispatch,
 }) => {
   useEffect(() => {
-    dispatch(getSingleDishAction(getNavigationParam('id', 'NO-ID')));
+    const dishId = getNavigationParam('id', 'NO-ID').split('_')[0];
+    dispatch(getSingleDishAction(dishId));
   }, []);
 
   return (

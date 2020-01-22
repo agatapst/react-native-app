@@ -14,6 +14,7 @@ export default StyleSheet.create({
     color: black,
     marginBottom: 30,
     marginTop: 10,
+    paddingTop: 16,
     fontFamily: main,
   },
 });

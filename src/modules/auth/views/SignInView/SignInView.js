@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { authActions } from '../../redux/actions';
 
 import Input from '../../../../base/components/Input';
+import PasswordInput from '../../../../base/components/PasswordInput';
 import ActionButton from '../../../../base/components/ActionButton';
 import AuthContainer from '../../../../base/components/AuthContainer';
 import HeaderTitle from '../../../../base/components/HeaderTitle';
@@ -25,14 +26,17 @@ class SignInView extends Component {
 
   signIn = () => {
     const { dispatch, navigation } = this.props;
+
     const { email, password } = this.state;
 
-    const payload = {
-      email,
-      password,
-    };
+    if (email && password) {
+      const payload = {
+        email,
+        password,
+      };
 
-    dispatch(authActions.signIn(payload, navigation));
+      dispatch(authActions.signIn(payload, navigation));
+    }
   };
 
   render() {
@@ -54,11 +58,11 @@ class SignInView extends Component {
             onChangeText={(value) => this.setState({ email: value })}
             autoCapitalize="none"
           />
-          <Input
+          <PasswordInput
+            isPassword
             placeholder="password"
             value={password}
             onChangeText={(value) => this.setState({ password: value })}
-            secureTextEntry
           />
           <ActionButton text="SIGN IN" onPress={() => this.signIn()} />
         </View>

@@ -10,14 +10,25 @@ export const getDishes = ({
   page = 0,
   perPage = 10,
   query = '',
+  filters = {},
   loadMore = false,
-} = {}) =>
-  apiAction(
+} = {}) => {
+  let filtersQuery = '';
+  const searchQuery = query ? `&search=${query}` : '';
+
+  Object.keys(filters).forEach((filterKey) => {
+    if (filters[filterKey]) {
+      filtersQuery += `&filters[${filterKey}]=${filters[filterKey]}`;
+    }
+  });
+
+  return apiAction(
     GET_DISHES,
     'GET',
-    `${API.GET_DISHES}?page=${page}&perPage=${perPage}&search=${query}`,
+    `${API.GET_DISHES}?page=${page}&perPage=${perPage}${searchQuery}${filtersQuery}`,
     { loadMore },
   );
+};
 
 export const getSingleDish = (id) =>
   apiAction(GET_SINGLE_DISH, 'GET', `${API.GET_DISHES}/${id}`);

@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
-import DishesScreen from '../screens/DishesScreen';
+import DishesScreen from '../screens/DishesScreen/DishesScreen';
 import SingleDishScreen from '../screens/SingleDishScreen';
 import SettingsMenuScreen from '../screens/SettingsMenuScreen';
 import ProfileScreen from '../screens/ProfileScreen';

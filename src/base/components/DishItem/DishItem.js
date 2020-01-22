@@ -1,5 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
@@ -7,6 +8,8 @@ import LocalImage from '../LocalImage';
 import ApiImage from '../ApiImage';
 import Styles from './Styles';
 import AdditionalDishInfo from '../AdditionalDishInfo/AdditionalDishInfo';
+import dishTypeFilters from '../../constants/DishTypeFilters';
+import { DishesFiltersContext } from '../../../common/utils/DishesFiltersContext';
 
 export default function DishItem(props) {
   const {
@@ -15,10 +18,6 @@ export default function DishItem(props) {
     preparationTime,
     portions,
     difficulty,
-    isVegan,
-    isVegetarian,
-    isGlutenFree,
-    isLactoseFree,
     image,
     onPress,
   } = props;
@@ -30,6 +29,7 @@ export default function DishItem(props) {
     badges,
     img,
   } = Styles;
+  const { changeFilters } = useContext(DishesFiltersContext);
 
   return (
     <View style={container}>
@@ -52,10 +52,19 @@ export default function DishItem(props) {
           difficulty={difficulty}
         />
         <View style={badges}>
-          {isVegan && <Badge>Vegan</Badge>}
-          {isVegetarian && <Badge>Vegetarian</Badge>}
-          {isGlutenFree && <Badge>Glutenfree</Badge>}
-          {isLactoseFree && <Badge>Lactosefree</Badge>}
+          {Object.keys(dishTypeFilters).map(
+            (dishTypeFilterKey, index) =>
+              props[dishTypeFilterKey] && (
+                <Badge
+                  key={index}
+                  onPress={() => {
+                    changeFilters({ [dishTypeFilterKey]: true }, false);
+                  }}
+                >
+                  {dishTypeFilters[dishTypeFilterKey]}
+                </Badge>
+              ),
+          )}
         </View>
       </View>
     </View>
@@ -68,10 +77,6 @@ DishItem.propTypes = {
   preparationTime: PropTypes.number.isRequired,
   portions: PropTypes.number.isRequired,
   difficulty: PropTypes.number.isRequired,
-  isVegan: PropTypes.bool.isRequired,
-  isVegetarian: PropTypes.bool.isRequired,
-  isGlutenFree: PropTypes.bool.isRequired,
-  isLactoseFree: PropTypes.bool.isRequired,
   image: PropTypes.string,
   onPress: PropTypes.func.isRequired,
 };
