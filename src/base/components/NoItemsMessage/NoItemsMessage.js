@@ -5,9 +5,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Styles from './Styles';
 import Colors from '../../constants/Colors';
 
-const NoItemsMessage = ({ text }) => (
+const NoItemsMessage = ({ text, icon }) => (
   <View style={Styles.container}>
-    <MaterialCommunityIcons name="food-off" size={96} color={Colors.gray} />
+    {icon || <MaterialCommunityIcons name="food-off" size={96} color={Colors.gray} />}
     <Text style={Styles.text}>
       {text}
     </Text>
@@ -16,6 +16,11 @@ const NoItemsMessage = ({ text }) => (
 
 NoItemsMessage.propTypes = {
   text: PropTypes.string.isRequired,
+  icon: PropTypes.element,
+};
+
+NoItemsMessage.defaultProps = {
+  icon: null,
 };
 
 export default NoItemsMessage;
