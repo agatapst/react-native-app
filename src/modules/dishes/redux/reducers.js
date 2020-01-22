@@ -12,7 +12,11 @@ export default combineReducers({
         ...action.data,
         data: [
           ...stateData,
-          ...action.data.data.map((item) => ({ ...item, id: `${item.id}_${(new Date()).toISOString()}` })),
+          ...action.data.data.map((item) => ({
+            ...item,
+            id: `${item.id}`,
+            listId: `${item.id}_${(new Date()).toISOString()}`,
+          })),
         ],
       },
     };
