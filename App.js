@@ -8,6 +8,7 @@ import * as Font from 'expo-font';
 import createStore from './src/base/redux/configureStore';
 import rootSaga from './src/base/redux/sagas';
 import Root from './src/base/containers/Root';
+import ShoppingListProvider from './src/base/context/ShoppingListContext';
 
 console.disableYellowBox = true;
 
@@ -47,8 +48,10 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      <Root />
+      <ShoppingListProvider>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <Root />
+      </ShoppingListProvider>
     </Provider>
   );
 }
