@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
 import DishesScreen from '../screens/DishesScreen/DishesScreen';
@@ -10,12 +10,14 @@ import ProfileScreen from '../screens/ProfileScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
 import Routes from '../constants/Routes';
+import ShoppingListScreen from '../screens/ShoppingListScreen/ShoppingListScreen';
 
 const {
   SETTINGS_MENU_ROUTE,
   HOME_ROUTE,
   BOTTOM_NAVIGATOR_ROUTE,
   DISHES_ROUTE,
+  SHOPPING_LIST_ROUTE,
 } = Routes;
 
 const SettingsStack = createStackNavigator(
@@ -64,6 +66,20 @@ const DishesStack = createStackNavigator(
   },
 );
 
+const ShoppingListStack = createStackNavigator(
+  {
+    ShoppingList: {
+      screen: ShoppingListScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+  },
+  {
+    initialRouteName: SHOPPING_LIST_ROUTE,
+  },
+);
+
 const MainTabNavigator = createMaterialBottomTabNavigator(
   {
     Home: {
@@ -80,6 +96,14 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
         title: 'Dishes',
         tabBarLabel: 'Dishes',
         tabBarIcon: <Ionicons name="ios-pizza" size={24} color="white" />,
+      },
+    },
+    ShoppingList: {
+      screen: ShoppingListStack,
+      navigationOptions: {
+        title: 'Shopping List',
+        tabBarLabel: 'Shopping List',
+        tabBarIcon: <MaterialIcons name="shopping-cart" size={24} color="white" />,
       },
     },
     Settings: {
