@@ -1,8 +1,9 @@
+import { API_URL } from 'react-native-dotenv';
 import axios from 'axios';
 
 export const request = async (method, url, data) => {
   const requestConfig = {
-    baseURL: 'http://localhost:3000',
+    baseURL: API_URL,
     method,
     url,
     data,
