@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { GET_DISHES, GET_DISH } from './actions';
+import { GET_DISHES, GET_SINGLE_DISH } from './actions';
 import { apiReducer } from '../../../base/redux/utils';
 
 export default combineReducers({
@@ -17,5 +17,5 @@ export default combineReducers({
       },
     };
   }),
-  getDish: apiReducer(GET_DISH),
+  getSingleDish: apiReducer(GET_SINGLE_DISH),
 });

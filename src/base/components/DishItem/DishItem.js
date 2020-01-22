@@ -1,11 +1,15 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Badge from '../Badge';
+import LocalImage from '../LocalImage';
+import ApiImage from '../ApiImage';
 import Styles from './Styles';
+import AdditionalDishInfo from '../AdditionalDishInfo/AdditionalDishInfo';
 import dishTypeFilters from '../../constants/DishTypeFilters';
-import { DishesFiltersContext } from '../../screens/DishesScreen/DishesScreen';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesFiltersContext';
 
 export default function DishItem(props) {
   const {
@@ -13,6 +17,7 @@ export default function DishItem(props) {
     description,
     preparationTime,
     portions,
+    difficulty,
     image,
     onPress,
   } = props;
@@ -22,49 +27,44 @@ export default function DishItem(props) {
     listBox,
     container,
     badges,
-    icon,
     img,
-    row,
-    iconsRow,
-    additionalInfo,
   } = Styles;
   const { changeFilters } = useContext(DishesFiltersContext);
 
   return (
     <View style={container}>
-      <Image
-        source={{
-          uri: `http://localhost:3000/dish-image/${image}`,
-        }}
-        style={img}
-      />
+      {image ? (
+        <ApiImage fileName={image} style={img} />
+      ) : (
+        <LocalImage
+          source={require('../../../assets/images/dish.jpeg')}
+          style={img}
+        />
+      )}
       <View style={listBox}>
         <TouchableOpacity onPress={onPress}>
           <Text style={listElementHeader}>{name}</Text>
         </TouchableOpacity>
         <Text style={listElementDescription}>{description}</Text>
-        <View style={[row, iconsRow]}>
-          <View style={row}>
-            <Image
-              source={require('../../../assets/images/time.png')}
-              style={icon}
-            />
-            <Text style={additionalInfo}>Time: {preparationTime} minutes</Text>
-          </View>
-          <View style={row}>
-            <Image
-              source={require('../../../assets/images/portions.png')}
-              style={icon}
-            />
-            <Text style={additionalInfo}>Portions: {portions}</Text>
-          </View>
-        </View>
+        <AdditionalDishInfo
+          preparationTime={preparationTime}
+          portions={portions}
+          difficulty={difficulty}
+        />
         <View style={badges}>
-          {Object.keys(dishTypeFilters).map((dishTypeFilterKey) => props[dishTypeFilterKey] && (
-            <Badge onPress={() => { changeFilters({ [dishTypeFilterKey]: true }, false); }}>
-              {dishTypeFilters[dishTypeFilterKey]}
-            </Badge>
-          ))}
+          {Object.keys(dishTypeFilters).map(
+            (dishTypeFilterKey, index) =>
+              props[dishTypeFilterKey] && (
+                <Badge
+                  key={index}
+                  onPress={() => {
+                    changeFilters({ [dishTypeFilterKey]: true }, false);
+                  }}
+                >
+                  {dishTypeFilters[dishTypeFilterKey]}
+                </Badge>
+              ),
+          )}
         </View>
       </View>
     </View>
@@ -76,10 +76,11 @@ DishItem.propTypes = {
   description: PropTypes.string.isRequired,
   preparationTime: PropTypes.number.isRequired,
   portions: PropTypes.number.isRequired,
-  isVegan: PropTypes.bool.isRequired,
-  isVegetarian: PropTypes.bool.isRequired,
-  isGlutenFree: PropTypes.bool.isRequired,
-  isLactoseFree: PropTypes.bool.isRequired,
-  image: PropTypes.string.isRequired,
+  difficulty: PropTypes.number.isRequired,
+  image: PropTypes.string,
   onPress: PropTypes.func.isRequired,
+};
+
+DishItem.defaultProps = {
+  image: null,
 };

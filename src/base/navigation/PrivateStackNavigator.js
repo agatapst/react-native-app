@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
 import DishesScreen from '../screens/DishesScreen/DishesScreen';
-import DishScreen from '../screens/DishScreen';
+import SingleDishScreen from '../screens/SingleDishScreen';
 import SettingsMenuScreen from '../screens/SettingsMenuScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
@@ -52,8 +52,8 @@ const DishesStack = createStackNavigator(
         header: null,
       }),
     },
-    Dish: {
-      screen: DishScreen,
+    SingleDish: {
+      screen: SingleDishScreen,
       navigationOptions: () => ({
         header: null,
       }),

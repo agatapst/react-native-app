@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable function-paren-newline */
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
@@ -8,14 +9,13 @@ import DishesList from '../../components/DishesList';
 import ScreenContainer from '../../components/ScreenContainer';
 import { getDishes as getDishesAction } from '../../../modules/dishes/redux/actions';
 import SearchBar from '../../components/SearchBar';
+import { DishesFiltersContext } from './DishesFiltersContext';
 import DishesFilterBar from '../../components/DishesFilterBar';
 import Styles from './Styles';
 
 const DISHES_PER_PAGE = 3;
 const QUERY_MIN_LENGTH = 3;
 const WAIT_BEFORE_REQUEST_CALL = 1000;
-
-export const DishesFiltersContext = React.createContext({});
 
 const DishesScreen = ({
   getDishes: { isFetching, data },
@@ -35,7 +35,12 @@ const DishesScreen = ({
   const fetchDishes = useCallback(() => {
     const apiCall = () => {
       if (!isFetching) {
-        const queryParams = { page, perPage: DISHES_PER_PAGE, filters, loadMore: loadMore.current };
+        const queryParams = {
+          page,
+          perPage: DISHES_PER_PAGE,
+          filters,
+          loadMore: loadMore.current,
+        };
 
         if (query && query.length >= QUERY_MIN_LENGTH) {
           queryParams.query = query;
@@ -47,7 +52,10 @@ const DishesScreen = ({
     };
 
     clearTimeout(callTimeoutRef.current);
-    callTimeoutRef.current = setTimeout(apiCall, forceFetch.current ? 0 : WAIT_BEFORE_REQUEST_CALL);
+    callTimeoutRef.current = setTimeout(
+      apiCall,
+      forceFetch.current ? 0 : WAIT_BEFORE_REQUEST_CALL,
+    );
   }, [page, query, filters]);
 
   useEffect(() => {
@@ -59,21 +67,31 @@ const DishesScreen = ({
     };
   }, [page, query, filters]);
 
-  const onSearchChange = useCallback((text) => {
-    loadMore.current = false;
-    setQuery(text);
-    setPage(0);
-  }, [setPage, setQuery]);
+  const onSearchChange = useCallback(
+    (text) => {
+      loadMore.current = false;
+      setQuery(text);
+      setPage(0);
+    },
+    [setPage, setQuery],
+  );
 
-  const onFiltersChange = useCallback((newFilters, withFetchTimeout = true) => {
-    loadMore.current = false;
-    forceFetch.current = !withFetchTimeout;
-    setFilters(newFilters);
-    setPage(0);
-  }, [setPage, setFilters]);
+  const onFiltersChange = useCallback(
+    (newFilters, withFetchTimeout = true) => {
+      loadMore.current = false;
+      forceFetch.current = !withFetchTimeout;
+      setFilters(newFilters);
+      setPage(0);
+    },
+    [setPage, setFilters],
+  );
 
   const onEndReached = useCallback(() => {
-    if (!isFetching && data.data.length >= DISHES_PER_PAGE && data.data.length < data.total) {
+    if (
+      !isFetching &&
+      data.data.length >= DISHES_PER_PAGE &&
+      data.data.length < data.total
+    ) {
       forceFetch.current = true;
       setPage((prevPage) => prevPage + 1);
     }
@@ -84,7 +102,9 @@ const DishesScreen = ({
   }, [setShowFiltersBar]);
 
   return (
-    <DishesFiltersContext.Provider value={{ filters, changeFilters: onFiltersChange }}>
+    <DishesFiltersContext.Provider
+      value={{ filters, changeFilters: onFiltersChange }}
+    >
       <ScreenContainer>
         <View style={container}>
           <SearchBar
@@ -93,13 +113,13 @@ const DishesScreen = ({
             placeholder="Search for a recipe"
             onFilterButtonPress={onFilterButtonPress}
           />
-          {showFiltersBar && (<DishesFilterBar onChange={onFiltersChange} />)}
+          {showFiltersBar && <DishesFilterBar onChange={onFiltersChange} />}
           <View style={dishesContainer}>
             <DishesList
               dishes={data ? data.data : []}
               isLoading={isFetching}
               onEndReached={onEndReached}
-              onPress={() => navigate('Home')}
+              onPress={(dishId) => navigate('SingleDish', { id: dishId })}
             />
             {isFetching && <Spinner />}
           </View>

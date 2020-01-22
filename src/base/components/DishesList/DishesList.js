@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-newline */
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, FlatList } from 'react-native';
@@ -11,21 +12,26 @@ const minHeaderFontSize = 20;
 
 const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
   const { list } = Styles;
-  const { default: { headerTitle } } = HeaderTitleStyles;
+  const {
+    default: { headerTitle },
+  } = HeaderTitleStyles;
 
   const [scrollOffset] = useState(new Animated.Value(0));
 
   const keyExtractor = useCallback((item) => `${item.id}`, []);
 
-  const onScroll = useCallback(({
-    nativeEvent: {
-      contentOffset: { y },
+  const onScroll = useCallback(
+    ({
+      nativeEvent: {
+        contentOffset: { y },
+      },
+    }) => {
+      const scrollSensitivity = 0.5;
+      const offset = y / scrollSensitivity;
+      scrollOffset.setValue(offset);
     },
-  }) => {
-    const scrollSensitivity = 0.5;
-    const offset = y / scrollSensitivity;
-    scrollOffset.setValue(offset);
-  }, [scrollOffset]);
+    [scrollOffset],
+  );
 
   return (
     <FlatList
@@ -36,21 +42,25 @@ const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
       onEndReachedThreshold={0.01}
       initialNumToRender={0}
       maxToRenderPerBatch={1}
-      ListHeaderComponent={() => !!dishes.length && (
-        <Animated.Text
-          style={{
-            ...headerTitle,
-            fontSize: scrollOffset.interpolate({
-              inputRange: [0, 200],
-              outputRange: [maxHeaderFontSize, minHeaderFontSize],
-              extrapolate: 'clamp',
-            }),
-          }}
-        >
-          Choose a recipe:
-        </Animated.Text>
-      )}
-      ListEmptyComponent={() => !isLoading && (<NoItemsMessage text="No more recipes" />)}
+      ListHeaderComponent={() =>
+        !!dishes.length && (
+          <Animated.Text
+            style={{
+              ...headerTitle,
+              fontSize: scrollOffset.interpolate({
+                inputRange: [0, 200],
+                outputRange: [maxHeaderFontSize, minHeaderFontSize],
+                extrapolate: 'clamp',
+              }),
+            }}
+          >
+            Choose a recipe:
+          </Animated.Text>
+        )
+      }
+      ListEmptyComponent={() =>
+        !isLoading && <NoItemsMessage text="No more recipes" />
+      }
       onScroll={onScroll}
       onEndReached={onEndReached}
       renderItem={({ item }) => (
@@ -59,11 +69,13 @@ const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
           description={item.description}
           preparationTime={item.preparationTime}
           portions={item.portions}
+          difficulty={item.difficulty}
           isVegan={item.isVegan}
           isVegetarian={item.isVegetarian}
           isGlutenFree={item.isGlutenFree}
           isLactoseFree={item.isLactoseFree}
           image={item.image}
+          key={item.id}
           onPress={() => onPress(item.id)}
         />
       )}

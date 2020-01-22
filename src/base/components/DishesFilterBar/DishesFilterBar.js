@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Styles from './Styles';
 import CheckboxBadge from '../CheckboxBadge';
 import dishTypeFilters from '../../constants/DishTypeFilters';
-import { DishesFiltersContext } from '../../screens/DishesScreen/DishesScreen';
+import { DishesFiltersContext } from '../../screens/DishesScreen/DishesFiltersContext';
 
 const { container } = Styles;
 

@@ -4,12 +4,13 @@ import Typography from '../../constants/Typography';
 
 const {
   fontSize: { big, regular },
+  fontFamily: { secondary },
 } = Typography;
 const { white, brightRed } = Colors;
 
 export default StyleSheet.create({
   textStyle: {
-    fontFamily: 'dm-sans',
+    fontFamily: secondary,
     fontSize: big,
     color: white,
     textAlign: 'center',

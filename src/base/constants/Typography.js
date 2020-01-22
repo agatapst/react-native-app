@@ -7,4 +7,8 @@ export default {
     headerBig: 22,
     extraBig: 38,
   },
+  fontFamily: {
+    main: 'frank-ruhl-bold',
+    secondary: 'dm-sans',
+  },
 };
