@@ -12,7 +12,7 @@ import ShoppingListProvider from './src/base/context/ShoppingListContext';
 
 console.disableYellowBox = true;
 
-const store = createStore();
+export const store = createStore();
 store.runSaga(rootSaga);
 
 async function loadResourcesAsync() {

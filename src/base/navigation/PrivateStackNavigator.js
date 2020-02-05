@@ -11,6 +11,8 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
 import Routes from '../constants/Routes';
 import ShoppingListScreen from '../screens/ShoppingListScreen/ShoppingListScreen';
+import { store } from '../../../App';
+import { changeScreen } from '../../modules/navigation/redux/actions';
 
 const {
   SETTINGS_MENU_ROUTE,
@@ -80,6 +82,11 @@ const ShoppingListStack = createStackNavigator(
   },
 );
 
+const onNavigationButtonPressed = ({ defaultHandler, navigation }) => {
+  store.dispatch(changeScreen(navigation.state.routeName));
+  defaultHandler();
+};
+
 const MainTabNavigator = createMaterialBottomTabNavigator(
   {
     Home: {
@@ -96,6 +103,7 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
         title: 'Dishes',
         tabBarLabel: 'Dishes',
         tabBarIcon: <Ionicons name="ios-pizza" size={24} color="white" />,
+        tabBarOnPress: onNavigationButtonPressed,
       },
     },
     ShoppingList: {
@@ -104,6 +112,7 @@ const MainTabNavigator = createMaterialBottomTabNavigator(
         title: 'Shopping List',
         tabBarLabel: 'Shopping List',
         tabBarIcon: <MaterialIcons name="shopping-cart" size={24} color="white" />,
+        tabBarOnPress: onNavigationButtonPressed,
       },
     },
     Settings: {
