@@ -15,7 +15,7 @@ const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
 
   const [scrollOffset] = useState(new Animated.Value(0));
 
-  const keyExtractor = useCallback((item) => `${item.id}`, []);
+  const keyExtractor = useCallback((item) => item.listId, []);
 
   const onScroll = useCallback(({
     nativeEvent: {
@@ -55,6 +55,7 @@ const DishesList = ({ dishes, onPress, onEndReached, isLoading }) => {
       onEndReached={onEndReached}
       renderItem={({ item }) => (
         <DishItem
+          id={item.id}
           name={item.name}
           description={item.description}
           preparationTime={item.preparationTime}

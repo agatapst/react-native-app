@@ -11,7 +11,7 @@ import Root from './src/base/containers/Root';
 
 console.disableYellowBox = true;
 
-const store = createStore();
+export const store = createStore();
 store.runSaga(rootSaga);
 
 async function loadResourcesAsync() {
